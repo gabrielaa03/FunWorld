@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/siva"
+    tools:context="com.gabrielaangebrandt.funworld.OneCoutryViewActivity.view.CountryDetails">
+
+    <!--IME-->
+    <TextView
+        android:id="@+id/countryTitle"
+        android:layout_width="match_parent"
+        android:layout_height="150px"
+        android:textAlignment="center"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:textColor="@color/red"
+        tools:text="asopkdapsokd"/>
+
+    <ImageView
+        android:id="@+id/iv_flag"
+        android:layout_width="wrap_content"
+        android:layout_height="130dp"
+        android:layout_below="@+id/countryTitle"
+        tools:background="@drawable/hr"
+        />
+
+    <!--  REGIJA -->
+
+    <TextView
+        android:id="@+id/tv_region_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/nazivRegije"
+        android:layout_marginTop="20dp"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/iv_flag"/>
+
+    <TextView
+        android:id="@+id/tv_region_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        tools:text="TextView"
+        android:textSize="20sp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/iv_flag"
+        android:layout_toEndOf="@+id/tv_region_label"
+        />
+
+    <!--POVRSINA-->
+    <TextView
+        android:id="@+id/tv_area_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/area_label"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/tv_region_label" />
+
+    <TextView
+        android:id="@+id/tv_area_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        tools:text="TextView"
+        android:textSize="20sp"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@id/tv_area_label"
+        android:layout_below="@+id/tv_region_value" />
+
+    <!--  GLAVNI GRAD-->
+
+
+    <TextView
+        android:id="@+id/tv_capital_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/capital_label"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/tv_area_label" />
+
+    <TextView
+        android:id="@+id/tv_capital_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        tools:text="TextView"
+        android:textSize="20sp"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/tv_capital_label"
+        android:layout_below="@+id/tv_area_value" />
+
+    <!--POPULACIJA-->
+
+
+    <TextView
+        android:id="@+id/tv_population_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/population_label"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/tv_capital_label" />
+
+    <TextView
+        android:id="@+id/tv_population_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        tools:text="TextView"
+        android:textSize="20sp"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@id/tv_population_label"
+        android:layout_below="@+id/tv_capital_value" />
+
+    <!--JEZIK-->
+
+    <TextView
+        android:id="@+id/tv_language_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/language_label"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/tv_population_label" />
+
+    <TextView
+        android:id="@+id/tv_language_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        tools:text="TextView"
+        android:textSize="20sp"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/tv_language_label"
+        android:layout_below="@+id/tv_population_value" />
+
+    <!--VALUTA-->
+
+    <TextView
+        android:id="@+id/tv_currency_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/currency_label"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/tv_language_label" />
+
+    <TextView
+        android:id="@+id/tv_currency_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="TextView"
+        android:textSize="20sp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="5dp"
+        android:layout_below="@+id/tv_language_value"
+        android:layout_toEndOf="@+id/tv_currency_label" />
+
+    <!--ALPHACODE-->
+    <TextView
+        android:id="@+id/tv_alphacode_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/alphacode_label"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_below="@+id/tv_currency_label" />
+
+    <TextView
+        android:id="@+id/tv_alphacode_value"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        tools:text="TextView"
+        android:textSize="20sp"
+        android:layout_marginLeft="5dp"
+        android:layout_toEndOf="@+id/tv_alphacode_label"
+        android:layout_below="@+id/tv_currency_value" />
+
+
+
+
+</RelativeLayout>

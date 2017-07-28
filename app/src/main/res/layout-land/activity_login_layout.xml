@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.gabrielaangebrandt.funworld.LauncherActivity.view.Login">
+
+
+
+    <EditText
+        android:id="@+id/et_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:hint="@string/prompt_username"
+        android:layout_below="@+id/iv_logo"/>
+    <EditText
+        android:id="@+id/et_password"
+        android:layout_below="@+id/et_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:inputType="textPassword"
+        android:layout_marginTop="10dp"
+        android:hint="@string/prompt_password"/>
+    <Button
+    android:layout_width="300dp"
+    android:layout_height="40dp"
+    android:id="@+id/btn_login1"
+    android:layout_below="@+id/et_password"
+    android:layout_marginTop="10dp"
+    android:layout_centerHorizontal="true"
+    android:textColor="@color/white"
+    android:background="@color/colorPrimary"
+    android:textStyle="bold"
+    android:text="@string/logIn"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/or"
+        android:id="@+id/tv_or"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/btn_login1"/>
+    <Button
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:id="@+id/btn_register"
+        android:layout_below="@+id/tv_or"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:background="@color/colorPrimary"
+        android:text="@string/register"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/forgottenPass"
+        android:id="@+id/tv_forgotten_pass"
+        android:textSize="20sp"
+        android:layout_centerHorizontal="true"
+        android:textAlignment="center"
+        android:layout_below="@+id/btn_register"
+        android:clickable="true"
+        android:background="@drawable/text_color"/>
+<ImageView
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:id="@+id/imageView2"
+    android:src="@drawable/logo"
+    android:layout_below="@+id/et_password"
+    android:layout_alignParentLeft="true"
+    android:layout_alignParentStart="true"
+    android:layout_toLeftOf="@+id/btn_login1"
+    android:layout_toStartOf="@+id/btn_login1"
+    android:layout_centerHorizontal="true"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:src="@drawable/logo"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_toRightOf="@+id/btn_login1"
+        android:layout_toEndOf="@+id/btn_login1"
+        android:layout_centerHorizontal="true"
+       android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true" />
+
+
+
+</RelativeLayout>

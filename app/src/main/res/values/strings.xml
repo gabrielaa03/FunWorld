@@ -1,0 +1,114 @@
+<resources>
+    <string name="app_name">FunWorld</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="action_register">Register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="or">or</string>
+    <string name="logIn">Log in</string>
+    <string name="register">Register</string>
+    <string name="name">Name:</string>
+    <string name="hint_name">e.g. Dave</string>
+    <string name="egUsername">e.g. Dave1232</string>
+    <string name="password">Password:</string>
+    <string name="username">Username:</string>
+    <string name="repeatPassword">Repeat password:</string>
+    <string name="email">Email:</string>
+    <string name="hint_email">e.g.  dave@gmail.com</string>
+    <string name="error_passwordsDontMatch">Passwords do not match!</string>
+    <string name="chooseQuestion">Choose one question for password recover:</string>
+    <string name="example_answer">e.g. My mother\'s birthplace is Osijek.</string>
+    <string-array name="questions">
+        <item>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</item>
+        <item>What is your mothers birthplace?</item>
+        <item>What is the name of your first pet?</item>
+        <item>What is the name of your primary school teacher?</item>
+    </string-array>
+    <string name="countries">About country</string>
+    <string name="games">Games</string>
+    <string name="picado">Picado</string>
+    <string name="millionaire">Right Answer</string>
+    <string name="memory">Memory</string>
+    <string name="elementsArentEntered">You didn\'t enter all data.</string>
+    <string name="forgottenPass">Forgot your password?</string>
+    <string name="tvForgottenPass">If you have forgotten your password then choose question and answer it correctly.</string>
+    <string name="bForgottenPassword">Send me my password</string>/>
+    <string name="toastEmailCannotBeSent">Email cannot be sent. Try again...</string>/>
+    <string name="emailSubject">Your password for FunWorld</string>
+    <string name="nazivRegije">Region: </string>
+    <string name="area_label">Area (m2): </string>
+    <string name="capital_label">Capital: </string>
+    <string name="population_label">Population: </string>
+    <string name="language_label">Official language: </string>
+    <string name="currency_label">Currency: </string>
+    <string name="alphacode_label">Aplha code 3: </string>
+    <string name="yes">START GAME</string>
+    <string name="cancel">CANCEL</string>
+    <string name="userDoesNotExists">Wrong password or username.</string>
+    <string name="startgame">Do you want to play?</string>/>
+    <string-array name="countries1">
+        <item>Albania</item>
+        <item>Andorra</item>
+        <item>Armenia</item>
+        <item>Austria</item>
+        <item>Azerbaijan</item>
+        <item>Belarus</item>
+        <item>Belgium</item>
+        <item>Bosnia and Herzegovina</item>
+        <item>Bulgaria</item>
+        <item>Croatia</item>
+        <item>Cyprus</item>
+        <item>Czech Republic</item>
+        <item>Denmark</item>
+        <item>Estonia</item>
+        <item>Finland</item>
+        <item>France</item>
+        <item>Georgia</item>
+        <item>Germany</item>
+        <item>Greece</item>
+        <item>Hungary</item>
+        <item>Iceland</item>
+        <item>Ireland</item>
+        <item>Italy</item>
+        <item>Kazakhstan</item>
+        <item>Kosovo</item>
+        <item>Latvia</item>
+        <item>Liechtenstein</item>
+        <item>Lithuania</item>
+        <item>Luxembourg</item>
+        <item>Macedonia</item>
+        <item>Malta</item>
+        <item>Moldova</item>
+        <item>Monaco</item>
+        <item>Montenegro</item>
+        <item>Netherlands</item>
+        <item>Norway</item>
+        <item>Poland</item>
+        <item>Portugal</item>
+        <item>Romania</item>
+        <item>Russia</item>
+        <item>San Marino</item>
+        <item>Serbia</item>
+        <item>Slovakia</item>
+        <item>Slovenia</item>
+        <item>Spain</item>
+        <item>Sweden</item>
+        <item>Switzerland</item>
+        <item>Turkey</item>
+        <item>Ukraine</item>
+        <item>United Kingdom</item>
+        <item>Vatican</item>
+    </string-array>
+
+</resources>

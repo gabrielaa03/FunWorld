@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/logo"
+        android:id="@+id/iv_logo"/>
+
+    <!--GUMB ZA MEMORY-->
+
+    <Button
+        android:id="@+id/btn_memory"
+        android:layout_below="@+id/iv_logo"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/memory"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:padding="16dp"
+        android:textStyle="bold"/>
+
+    <!--GUMB ZA TILT-->
+    <Button
+        android:id="@+id/btn_millionaire"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/btn_memory"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/millionaire"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:padding="16dp"
+        android:textStyle="bold"
+
+        />
+
+    <!--GUMB ZA PIKADO-->
+    <Button
+        android:id="@+id/btn_picado"
+        android:layout_width="300dp"
+        android:layout_height="100dp"
+        android:layout_below="@+id/btn_millionaire"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:text="@string/picado"
+        android:padding="16dp"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"/>
+
+</RelativeLayout>
