@@ -27,7 +27,11 @@ import butterknife.Unbinder;
  * Created by Gabriela on 11.5.2017..
  */
 
-public class FragmentCountries extends Fragment{
+public class
+
+
+
+FragmentCountries extends Fragment{
     Unbinder unbinder;
    @BindView(R.id.rv_countries) RecyclerView listView;
 

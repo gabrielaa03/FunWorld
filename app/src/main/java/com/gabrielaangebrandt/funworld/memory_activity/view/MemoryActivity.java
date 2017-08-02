@@ -2,16 +2,17 @@ package com.gabrielaangebrandt.funworld.memory_activity.view;
 
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.TextView;
 
-import com.gabrielaangebrandt.funworld.memory_activity.adapter.MyRecyclerAdapter;
 import com.gabrielaangebrandt.funworld.R;
 import com.gabrielaangebrandt.funworld.memory_activity.MemoryContract;
+import com.gabrielaangebrandt.funworld.memory_activity.adapter.MyRecyclerAdapter;
 import com.gabrielaangebrandt.funworld.memory_activity.presenter.MemoryPresenterImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -24,29 +25,27 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
 
    /* @BindView(R.id.player1) TextView player1;
     @BindView(R.id.player2) TextView player2;*/
-
-/*    @BindView(R.id.recyclerViewMemory) */RecyclerView recyclerView;
-    GridLayoutManager layoutManager;
+    @BindView(R.id.recyclerViewMemory) RecyclerView recyclerView;
+    RecyclerView.LayoutManager layoutManager;
     MyRecyclerAdapter adapter;
     MemoryContract.MemoryPresenter presenter;
+    private List<String> drawables = new ArrayList<>();
 
-    int[] drawables = new int[] {R.drawable.hr, R.drawable.fr, R.drawable.gb, R.drawable.lt, R.drawable.hr, R.drawable.fr, R.drawable.gb, R.drawable.lt};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-    //ButterKnife.bind(this);
+        setContentView(R.layout.memory_layout);
+        ButterKnife.bind(this);
 
         presenter = new MemoryPresenterImpl(this);
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewMemory);
 
-        layoutManager = new GridLayoutManager(this, 4);
+        layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
-
-       adapter = new MyRecyclerAdapter(drawables);
+        adapter = new MyRecyclerAdapter(drawables);
         recyclerView.setAdapter(adapter);
-
     }
 
     @Override
@@ -54,10 +53,15 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
         super.onStart();
         presenter.onStart();
     }
-
     @Override
     protected void onStop() {
         super.onStop();
         presenter.onStop();
+    }
+
+
+    @Override
+    public void getDefinedDrawables(List<String> definedDrawables) {
+        drawables = definedDrawables;
     }
 }
