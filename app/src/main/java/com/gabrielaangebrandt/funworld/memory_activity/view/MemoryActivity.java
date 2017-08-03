@@ -3,8 +3,10 @@ package com.gabrielaangebrandt.funworld.memory_activity.view;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.TextView;
 
 import com.gabrielaangebrandt.funworld.R;
 import com.gabrielaangebrandt.funworld.memory_activity.MemoryContract;
@@ -23,15 +25,12 @@ import butterknife.ButterKnife;
 
 public class MemoryActivity extends AppCompatActivity implements MemoryContract.MemoryView {
 
-   /* @BindView(R.id.player1) TextView player1;
-    @BindView(R.id.player2) TextView player2;*/
+    @BindView(R.id.player1)
+    TextView player1;
     @BindView(R.id.recyclerViewMemory) RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     MyRecyclerAdapter adapter;
     MemoryContract.MemoryPresenter presenter;
-    private List<String> drawables = new ArrayList<>();
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,10 +40,10 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
 
         presenter = new MemoryPresenterImpl(this);
 
-        layoutManager = new LinearLayoutManager(this);
+        layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
 
-        adapter = new MyRecyclerAdapter(drawables);
+        adapter = new MyRecyclerAdapter();
         recyclerView.setAdapter(adapter);
     }
 
@@ -59,9 +58,12 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
         presenter.onStop();
     }
 
-
     @Override
     public void getDefinedDrawables(List<String> definedDrawables) {
-        drawables = definedDrawables;
+        List<Integer> identifiers = new ArrayList<>();
+        for(String name : definedDrawables){
+            identifiers.add(getResources().getIdentifier(name, "drawable", getPackageName()));
+        }
+        adapter.addDataToAdapter(identifiers);
     }
 }

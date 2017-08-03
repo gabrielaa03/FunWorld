@@ -8,7 +8,6 @@ import java.util.List;
 
 public interface MemoryContract {
     interface MemoryView{
-
         void getDefinedDrawables(List<String> definedDrawables);
     }
 

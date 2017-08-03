@@ -55,5 +55,4 @@ public class RecyclerViewAdapterCountries extends RecyclerView.Adapter<RecyclerV
             view.getContext().startActivity(intent);
         }
     }
-
 }

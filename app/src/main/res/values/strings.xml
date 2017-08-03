@@ -58,7 +58,7 @@
     <string name="userDoesNotExists">Wrong password or username.</string>
     <string name="startgame">Do you want to play?</string>/>
     <string-array name="countries1">
-        <item>Albania</item>
+        <item name = "al">Albania</item>
         <item>Andorra</item>
         <item>Armenia</item>
         <item>Austria</item>
