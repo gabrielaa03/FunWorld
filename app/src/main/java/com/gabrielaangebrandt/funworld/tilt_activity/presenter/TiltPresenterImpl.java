@@ -16,14 +16,16 @@ import java.util.Random;
  */
 
 public class TiltPresenterImpl implements TiltContract.TiltPresenter {
-    TiltContract.TiltView view;
-    CountryInteractor interactor;
-    Map<String, String> hashmap = new HashMap<>();
+    private TiltContract.TiltView view;
+    private CountryInteractor interactor;
+    private Map<String, String> hashmap = new HashMap<>();
     String top = ""; String right=""; String left="";
+    Random random = new Random();
 
-    List<String> drawables = Arrays.asList("al", "am", "ad", "at", "az", "ba", "ch", "cy",
+    List<String> drawables = Arrays.asList(
+            "al", "am", "ad", "at", "az", "ba", "bg", "be", "by", "ch", "cy",
             "cz", "dk", "de", "fi", "fr", "gr", "gb", "gs",
-            "bg", "be", "by", "hr", "hu", "ie", "is", "it",
+             "hr", "hu", "ie", "is", "it", "ee", "xk", "es",
             "kz", "li", "lt", "lu", "lv", "md", "mc", "me",
             "mk", "mt", "nl", "no", "ro", "pl", "pt", "ro",
             "rs", "ru", "se", "si", "sk", "sm", "tr", "ua", "va");
@@ -36,10 +38,15 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     @Override
     public void onStart() {
 
-        Random random = new Random();
-        int number1 = random.nextInt(50);
-        int number2 = random.nextInt(50);
+        int number1;
+        int number2;
         putIntoHashMap();
+        do
+        { number1 = random.nextInt(52);
+            number2 = random.nextInt(52);
+        }while(number1 == number2);
+
+
         left = drawables.get(number1);
         right = drawables.get(number2);
         int num = random.nextInt(2);

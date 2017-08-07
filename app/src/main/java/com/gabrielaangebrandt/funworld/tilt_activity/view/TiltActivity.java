@@ -71,12 +71,12 @@ public class TiltActivity extends AppCompatActivity implements SensorEventListen
         float x = event.values[0];
         float y = event.values[1];
         if (Math.abs(x) > Math.abs(y)) {
-            if (y < 0) {
+            if (y < 3) {
                 String leftSide = "left";
                 presenter.checkAnswer(leftSide, nameFlag);
                 Log.d("success", "You tilt the device left");
             }
-            if (y > 0) {
+            if (y > 3) {
                 String rightSide = "right";
                 presenter.checkAnswer(rightSide, nameFlag);
                 Log.d("success", "You tilt the device right");
@@ -88,12 +88,11 @@ public class TiltActivity extends AppCompatActivity implements SensorEventListen
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
     }
 
-    @Override
     protected void onResume() {
         super.onResume();
         sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
     }
-    @Override
+
     protected void onPause() {
         super.onPause();
         sensorManager.unregisterListener(this);

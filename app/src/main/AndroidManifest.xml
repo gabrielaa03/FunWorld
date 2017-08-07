@@ -35,7 +35,8 @@
             android:name=".ForgottenPassword.view.ForgottenPassword"
             android:label="@string/app_name"
             android:parentActivityName=".register_activity.view.RegisterActivity" />
-        <activity android:name=".OneCoutryViewActivity.view.CountryDetails"></activity>
+        <activity android:name=".OneCoutryViewActivity.view.CountryDetails"
+            android:screenOrientation="portrait"></activity>
         <activity android:name=".memory_activity.view.MemoryActivity"></activity>
 
         <activity android:name=".tilt_activity.view.TiltActivity"

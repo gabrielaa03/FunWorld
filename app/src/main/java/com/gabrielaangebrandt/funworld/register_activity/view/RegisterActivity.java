@@ -1,31 +1,23 @@
 package com.gabrielaangebrandt.funworld.register_activity.view;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gabrielaangebrandt.funworld.MainActivity.view.MainActivity;
+import com.gabrielaangebrandt.funworld.LauncherActivity.view.Login;
 import com.gabrielaangebrandt.funworld.R;
-import com.gabrielaangebrandt.funworld.models.data_model.Player;
 import com.gabrielaangebrandt.funworld.database.DatabaseConfig;
-
-import java.util.Objects;
+import com.gabrielaangebrandt.funworld.models.data_model.Player;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import butterknife.OnItemSelected;
 import io.realm.Realm;
 
 public class RegisterActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener{
@@ -52,9 +44,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         question.setAdapter(adapter);
         question.setOnItemSelectedListener(this);
-        //dbHelper = new DbHelper(this);
-
-
     }
 
 
@@ -68,7 +57,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                   etAnswer.getText().toString() == "" || etAnswer.getText().toString().isEmpty()) {
               Toast.makeText(this, getText(R.string.elementsArentEntered), Toast.LENGTH_LONG).show();
           } else {
-              if (etPassword1.getText().toString() == etPassword2.getText().toString()) {
+              if (etPassword1.getText().toString().equals(etPassword2.getText().toString())) {
 
                   String name, username, pass, email, answer;
                   name = etName.getText().toString();
@@ -77,16 +66,13 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                   email = etEmail.getText().toString();
                   answer = etAnswer.getText().toString();
                   Player player = new Player(name, username, pass, email, q, answer);
-                  //     dbHelper.insertData(player);
-
                   Realm object = DatabaseConfig.getRealmInstance();
                   object.beginTransaction();
                   object.copyToRealmOrUpdate(player);
                   object.commitTransaction();
 
-
-                  Intent intent = new Intent(this, MainActivity.class);
-                  Log.d(TAG, "ovo je" + name + username);
+                  Toast.makeText(this, R.string.successfullRegistration, Toast.LENGTH_LONG).show();
+                  Intent intent = new Intent(this, Login.class);
                   startActivity(intent);
 
               } else {
