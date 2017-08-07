@@ -38,7 +38,8 @@
         <activity android:name=".OneCoutryViewActivity.view.CountryDetails"></activity>
         <activity android:name=".memory_activity.view.MemoryActivity"></activity>
 
-        <activity android:name=".tilt_activity.view.TiltActivity"></activity>
+        <activity android:name=".tilt_activity.view.TiltActivity"
+                  android:screenOrientation="landscape"></activity>
 
     </application>
 

@@ -5,10 +5,10 @@ import android.util.Log;
 import com.gabrielaangebrandt.funworld.models.CountryInteractorImpl;
 import com.gabrielaangebrandt.funworld.models.interactors.CountryInteractor;
 import com.gabrielaangebrandt.funworld.tilt_activity.TiltContract;
-import com.gabrielaangebrandt.funworld.tilt_activity.view.TiltActivity;
-
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -18,13 +18,15 @@ import java.util.Random;
 public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     TiltContract.TiltView view;
     CountryInteractor interactor;
+    Map<String, String> hashmap = new HashMap<>();
+    String top = ""; String right=""; String left="";
+
     List<String> drawables = Arrays.asList("al", "am", "ad", "at", "az", "ba", "ch", "cy",
             "cz", "dk", "de", "fi", "fr", "gr", "gb", "gs",
             "bg", "be", "by", "hr", "hu", "ie", "is", "it",
             "kz", "li", "lt", "lu", "lv", "md", "mc", "me",
             "mk", "mt", "nl", "no", "ro", "pl", "pt", "ro",
             "rs", "ru", "se", "si", "sk", "sm", "tr", "ua", "va");
-
 
     public TiltPresenterImpl(TiltContract.TiltView view) {
         this.view = view;
@@ -33,22 +35,98 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
 
     @Override
     public void onStart() {
+
         Random random = new Random();
         int number1 = random.nextInt(50);
         int number2 = random.nextInt(50);
-        String left = drawables.get(number1);
-        String right = drawables.get(number2);
-
-        String top = "";
+        putIntoHashMap();
+        left = drawables.get(number1);
+        right = drawables.get(number2);
         int num = random.nextInt(2);
         if(num == 0){
-
+            top = hashmap.get(left);
+        }else{
+            top = hashmap.get(right);
         }
         view.sendNumbers(left, right, top);
     }
 
     @Override
-    public void onStop() {
+    public void onStop() {}
+
+    @Override
+    public void checkAnswer(String value, String nameFlag) {
+        if(value == "left" ){
+            if(hashmap.get(nameFlag) == left){
+                   Log.d("success", "točan odgovor");
+            }
+            else{
+                Log.d("success", "netočan odgovor");
+            }
+
+        } else{
+
+            if(hashmap.get(nameFlag) == right){
+                Log.d("success", "točan odgovor");
+            }
+            else{
+                Log.d("success", "netočan odgovor");
+            }
+        }
+    }
+
+    public void putIntoHashMap(){
+        hashmap.put("al" , "Albania");
+        hashmap.put("am" , "Armenia");
+        hashmap.put("ad" , "Andorra");
+        hashmap.put("at" , "Austria");
+        hashmap.put("az" , "Azerbaijan");
+        hashmap.put("ba" , "Bosnia and Herzegovina");
+        hashmap.put("bg" , "Bulgaria");
+        hashmap.put("by" , "Belarus");
+        hashmap.put("be" , "Belgium");
+        hashmap.put("ch" , "Switzerland");
+        hashmap.put("hr" , "Croatia");
+        hashmap.put("cy" , "Cyprus");
+        hashmap.put("cz" , "Czech Republic");
+        hashmap.put("dk" , "Denmark");
+        hashmap.put("de" , "Germany");
+        hashmap.put("fi" , "Finland");
+        hashmap.put("fr" , "France");
+        hashmap.put("gr" , "Greece");
+        hashmap.put("gb" , "United Kingdom");
+        hashmap.put("ge" , "Georgia");
+        hashmap.put("ee" , "Estonia");
+        hashmap.put("hu" , "Hungary");
+        hashmap.put("is" , "Iceland");
+        hashmap.put("ie" , "Ireland");
+        hashmap.put("it" , "Italy");
+        hashmap.put("kz" , "Kazakhstan");
+        hashmap.put("xk" , "Kosovo");
+        hashmap.put("lv" , "Latvia");
+        hashmap.put("li" , "Liechtenstein");
+        hashmap.put("lt" , "Lithuania");
+        hashmap.put("lt" , "Luxembourg");
+        hashmap.put("mk" , "Macedonia");
+        hashmap.put("mt" , "Malta");
+        hashmap.put("md" , "Moldova");
+        hashmap.put("mc" , "Monaco");
+        hashmap.put("me" , "Montenegro");
+        hashmap.put("nl" , "Netherlands");
+        hashmap.put("no" , "Norway");
+        hashmap.put("pl" , "Poland");
+        hashmap.put("pt" , "Portugal");
+        hashmap.put("ro" , "Romania");
+        hashmap.put("ru" , "Russia");
+        hashmap.put("sm" , "San Marino");
+        hashmap.put("rs" , "Serbia");
+        hashmap.put("sk" , "Slovakia");
+        hashmap.put("si" , "Slovenia");
+        hashmap.put("es" , "Spain");
+        hashmap.put("se" , "Sweden");
+        hashmap.put("tr" , "Turkey");
+        hashmap.put("ua" , "Ukraine");
+        hashmap.put("va" , "Vatican");
 
     }
 
