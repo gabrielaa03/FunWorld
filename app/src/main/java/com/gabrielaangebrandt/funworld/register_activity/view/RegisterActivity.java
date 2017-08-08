@@ -49,40 +49,39 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
 
   @OnClick(R.id.btn_register_player)
     void checkLoginData() {
-          if (etName.getText().toString() == "" || etName.getText().toString().isEmpty() ||
-                  etUsername.getText().toString() == "" || etUsername.getText().toString().isEmpty() ||
-                  etPassword1.getText().toString() == "" || etPassword1.getText().toString().isEmpty() ||
-                  etPassword2.getText().toString() == "" || etPassword2.getText().toString().isEmpty() ||
-                  etEmail.getText().toString() == "" || etEmail.getText().toString().isEmpty() ||
-                  etAnswer.getText().toString() == "" || etAnswer.getText().toString().isEmpty()) {
-              Toast.makeText(this, getText(R.string.elementsArentEntered), Toast.LENGTH_LONG).show();
+      if (etName.getText().toString() == "" || etName.getText().toString().isEmpty() ||
+              etUsername.getText().toString() == "" || etUsername.getText().toString().isEmpty() ||
+              etPassword1.getText().toString() == "" || etPassword1.getText().toString().isEmpty() ||
+              etPassword2.getText().toString() == "" || etPassword2.getText().toString().isEmpty() ||
+              etEmail.getText().toString() == "" || etEmail.getText().toString().isEmpty() ||
+              etAnswer.getText().toString() == "" || etAnswer.getText().toString().isEmpty()) {
+          Toast.makeText(this, getText(R.string.elementsArentEntered), Toast.LENGTH_LONG).show();
+      } else {
+          if (etPassword1.getText().toString().equals(etPassword2.getText().toString())) {
+
+              String name, username, pass, email, answer;
+
+              name = etName.getText().toString();
+              username = etUsername.getText().toString();
+              pass = etPassword1.getText().toString();
+              email = etEmail.getText().toString();
+              answer = etAnswer.getText().toString();
+
+              Player player = new Player(name, username, pass, email, q, answer);
+              Realm object = DatabaseConfig.getRealmInstance();
+              object.beginTransaction();
+              object.copyToRealmOrUpdate(player);
+              object.commitTransaction();
+
+              Toast.makeText(this, R.string.successfullRegistration, Toast.LENGTH_LONG).show();
+              Intent intent = new Intent(this, Login.class);
+              startActivity(intent);
+
           } else {
-              if (etPassword1.getText().toString().equals(etPassword2.getText().toString())) {
-
-                  String name, username, pass, email, answer;
-                  name = etName.getText().toString();
-                  username = etUsername.getText().toString();
-                  pass = etPassword1.getText().toString();
-                  email = etEmail.getText().toString();
-                  answer = etAnswer.getText().toString();
-                  Player player = new Player(name, username, pass, email, q, answer);
-                  Realm object = DatabaseConfig.getRealmInstance();
-                  object.beginTransaction();
-                  object.copyToRealmOrUpdate(player);
-                  object.commitTransaction();
-
-                  Toast.makeText(this, R.string.successfullRegistration, Toast.LENGTH_LONG).show();
-                  Intent intent = new Intent(this, Login.class);
-                  startActivity(intent);
-
-              } else {
-                  etPassword2.setError(getText(R.string.error_passwordsDontMatch));
-              }
+              etPassword2.setError(getText(R.string.error_passwordsDontMatch));
           }
-
       }
-
-  //    @OnItemSelected
+  }
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
         q = question.getSelectedItem().toString();

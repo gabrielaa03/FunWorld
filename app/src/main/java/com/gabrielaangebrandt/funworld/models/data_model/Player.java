@@ -15,6 +15,7 @@ public class Player extends RealmObject {
     private String question;
     private String email;
     private String answer;
+
     public Player(){}
 
     public Player(String name, String username, String password, String email, String question, String answer){
@@ -25,6 +26,7 @@ public class Player extends RealmObject {
         this.question = question;
         this.answer = answer;
     }
+
     public String getName() {
         return name;
     }
@@ -72,4 +74,5 @@ public class Player extends RealmObject {
     public void setAnswer(String answer) {
         this.answer = answer;
     }
+
 }

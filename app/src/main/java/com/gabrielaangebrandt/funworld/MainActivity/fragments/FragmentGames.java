@@ -1,7 +1,6 @@
 package com.gabrielaangebrandt.funworld.MainActivity.fragments;
 
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,10 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.gabrielaangebrandt.funworld.picado_activity.view.PicadoActivity;
-import com.gabrielaangebrandt.funworld.tilt_activity.view.TiltActivity;
 import com.gabrielaangebrandt.funworld.R;
 import com.gabrielaangebrandt.funworld.memory_activity.view.MemoryActivity;
+import com.gabrielaangebrandt.funworld.picado_activity.view.PicadoActivity;
+import com.gabrielaangebrandt.funworld.tilt_activity.view.TiltActivity;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -34,54 +33,21 @@ public class FragmentGames extends Fragment{
 
     @OnClick(R.id.btn_memory)
         void openADMemory(){
-        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
-        alertDialog.setMessage(R.string.startgame)
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                })
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                dialog.dismiss();
-                Intent intent = new Intent (getContext(), MemoryActivity.class);
-                startActivity(intent);
-            }
-         }).show();
+        Intent intent = new Intent (getContext(), MemoryActivity.class);
+        startActivity(intent);
     }
 
     @OnClick(R.id.btn_picado)
      void openADPicado(){
+        Intent intent = new Intent(getContext(), PicadoActivity.class);
+        startActivity(intent);
         final AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(getContext());
-        alertDialog2.setMessage("R.string.startgame")
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent intent = new Intent(getContext(), PicadoActivity.class);
-                        startActivity(intent);
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                }).show();
     }
 
     @OnClick(R.id.btn_millionaire)
       void openADTilt(){
-        final AlertDialog.Builder alertDialog1 = new AlertDialog.Builder(getContext());
-        alertDialog1.setMessage("R.string.startgame")
-                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Intent intent = new Intent (getContext(), TiltActivity.class);
-                        startActivity(intent);
-                    }
-                })
-                .setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                }).show();
+        Intent intent = new Intent (getContext(), TiltActivity.class);
+        startActivity(intent);
     }
 
     @Override public void onDestroyView() {

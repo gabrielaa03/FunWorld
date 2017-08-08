@@ -27,7 +27,7 @@ public class Login extends AppCompatActivity implements LauncherContract.Launche
     @BindView(R.id.et_username)
     EditText username;
     LauncherContract.LauncherPresenter presenter;
-
+    Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,15 +44,17 @@ public class Login extends AppCompatActivity implements LauncherContract.Launche
 
     @OnClick(R.id.btn_login1)
     public void openMainActivity() {
-        Realm realm = DatabaseConfig.getRealmInstance();
+        realm = DatabaseConfig.getRealmInstance();
         Player user = realm.where(Player.class).equalTo("username", username.getText().toString()).findFirst();
-        if (password.getText().toString().equals(user.getPassword())) {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
-        }else if (username.getText().toString().equals(null) || password.getText().toString().equals(null)){
+        if (password.getText().toString().equals("") || password.getText().toString() == null || username.getText().toString().equals("") || username.getText().toString() == null) {
             Toast.makeText(this, R.string.userDoesNotExists, Toast.LENGTH_LONG).show();
-        }else {
-            Toast.makeText(this, R.string.userDoesNotExists, Toast.LENGTH_LONG).show();
+        } else {
+            if (password.getText().toString().equals(user.getPassword())) {
+                Intent intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(this, R.string.userDoesNotExists, Toast.LENGTH_LONG).show();
+            }
         }
     }
 
@@ -67,4 +69,13 @@ public class Login extends AppCompatActivity implements LauncherContract.Launche
         Intent intent2 = new Intent(this, ForgottenPassword.class);
         startActivity(intent2);
     }
+
+    @Override
+    protected void onDestroy() {
+        if(realm != null) {
+            realm.close();
+        }
+        super.onDestroy();
+    }
+
 }
