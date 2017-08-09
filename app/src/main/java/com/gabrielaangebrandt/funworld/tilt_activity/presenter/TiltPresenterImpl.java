@@ -1,6 +1,7 @@
 package com.gabrielaangebrandt.funworld.tilt_activity.presenter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
@@ -8,7 +9,6 @@ import com.gabrielaangebrandt.funworld.R;
 import com.gabrielaangebrandt.funworld.models.CountryInteractorImpl;
 import com.gabrielaangebrandt.funworld.models.interactors.CountryInteractor;
 import com.gabrielaangebrandt.funworld.tilt_activity.TiltContract;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -31,11 +31,11 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
 
     List<String> drawables = Arrays.asList(
             "al", "am", "ad", "at", "az", "ba", "bg", "be", "by", "ch", "cy",
-            "cz", "dk", "de", "fi", "fr", "gr", "gb", "gs",
+            "cz", "dk", "de", "fi", "fr", "gr", "gb", "ge",
             "hr", "hu", "ie", "is", "it", "ee", "xk", "es",
             "kz", "li", "lt", "lu", "lv", "md", "mc", "me",
-            "mk", "mt", "nl", "no", "ro", "pl", "pt", "ro",
-            "rs", "ru", "se", "si", "sk", "sm", "tr", "ua", "va");
+            "mk", "mt", "nl", "no", "ro", "rs", "ru", "pl",
+            "pt", "se", "si", "sk", "sm", "tr", "ua", "va");
 
     public TiltPresenterImpl(TiltContract.TiltView view) {
         this.view = view;
@@ -62,7 +62,6 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
         }
         view.sendNumbers(left, right, top);
     }
-
 
     @Override
     public void onStop() {
@@ -120,17 +119,18 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
         hashmap.put("by", "Belarus");
         hashmap.put("be", "Belgium");
         hashmap.put("ch", "Switzerland");
-        hashmap.put("hr", "Croatia");
         hashmap.put("cy", "Cyprus");
         hashmap.put("cz", "Czech Republic");
         hashmap.put("dk", "Denmark");
         hashmap.put("de", "Germany");
+        hashmap.put("ee", "Estonia");
+        hashmap.put("es", "Spain");
         hashmap.put("fi", "Finland");
         hashmap.put("fr", "France");
         hashmap.put("gr", "Greece");
         hashmap.put("gb", "United Kingdom");
         hashmap.put("ge", "Georgia");
-        hashmap.put("ee", "Estonia");
+        hashmap.put("hr", "Croatia");
         hashmap.put("hu", "Hungary");
         hashmap.put("is", "Iceland");
         hashmap.put("ie", "Ireland");
@@ -140,7 +140,7 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
         hashmap.put("lv", "Latvia");
         hashmap.put("li", "Liechtenstein");
         hashmap.put("lt", "Lithuania");
-        hashmap.put("lt", "Luxembourg");
+        hashmap.put("lu", "Luxembourg");
         hashmap.put("mk", "Macedonia");
         hashmap.put("mt", "Malta");
         hashmap.put("md", "Moldova");
@@ -152,11 +152,10 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
         hashmap.put("pt", "Portugal");
         hashmap.put("ro", "Romania");
         hashmap.put("ru", "Russia");
-        hashmap.put("sm", "San Marino");
         hashmap.put("rs", "Serbia");
+        hashmap.put("sm", "San Marino");
         hashmap.put("sk", "Slovakia");
         hashmap.put("si", "Slovenia");
-        hashmap.put("es", "Spain");
         hashmap.put("se", "Sweden");
         hashmap.put("tr", "Turkey");
         hashmap.put("ua", "Ukraine");

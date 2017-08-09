@@ -29,7 +29,7 @@ public class MemoryPresenterImpl implements MemoryContract.MemoryPresenter {
     public void onStart() {
         drawables = Arrays.asList(
                 "al", "am", "ad", "at", "az", "ba", "bg", "be", "by", "ch", "cy",
-                "cz", "dk", "de", "fi", "fr", "gr", "gb", "gs",
+                "cz", "dk", "de", "fi", "fr", "gr", "gb", "ge",
                 "hr", "hu", "ie", "is", "it", "ee", "xk", "es",
                 "kz", "li", "lt", "lu", "lv", "md", "mc", "me",
                 "mk", "mt", "nl", "no", "ro", "pl", "pt", "ro",
