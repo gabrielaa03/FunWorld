@@ -1,6 +1,10 @@
 package com.gabrielaangebrandt.funworld.tilt_activity.presenter;
 
 import android.content.Context;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -23,11 +27,14 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     private TiltContract.TiltView view;
     private CountryInteractor interactor;
     private Map<String, String> hashmap = new HashMap<>();
-    String top = "";
-    String right = "";
-    String left = "";
-    Random random = new Random();
-    int counterFalse = 0 , counterTrue = 0;
+    private String top = "";
+    private String right = "";
+    private String left = "";
+    private Random random = new Random();
+    private int counterFalse = 0 , counterTrue = 0;
+    AudioManager audioManager;
+    SoundPool soundPool;
+    int correctSound, incorrectSound;
 
     List<String> drawables = Arrays.asList(
             "al", "am", "ad", "at", "az", "ba", "bg", "be", "by", "ch", "cy",
@@ -48,8 +55,8 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
         int number2;
         putIntoHashMap();
         do {
-            number1 = random.nextInt(52);
-            number2 = random.nextInt(52);
+            number1 = random.nextInt(51);
+            number2 = random.nextInt(51);
         } while (number1 == number2);
 
         left = drawables.get(number1);
@@ -67,8 +74,16 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     public void onStop() {
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void checkAnswer(Context ctx, String side, String nameFlag) {
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(100)
+                .build();
+        correctSound = soundPool.load(ctx, R.raw.dustyroom_multimedia_correct_complete_bonus, 1);
+        incorrectSound = soundPool.load(ctx, R.raw.dustyroom_multimedia_incorrect_negative_tone, 1);
+        audioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
+
         String key = getKey(nameFlag);
         switch (side) {
             case "leftFlag":
@@ -77,12 +92,12 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
                 if (key.equals(left)) {
                     animation = AnimationUtils.loadAnimation(ctx, R.anim.zoom_in_flag);
                     counterTrue++;
-
                 } else {
                     animation = AnimationUtils.loadAnimation(ctx, R.anim.zoom_out);
                     counterFalse++;
                 }
                 view.sendAnimation("left", animation, counterFalse, counterTrue);
+
                 break;
             case "rightFlag":
                 Animation animation1;
@@ -95,6 +110,7 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
                     counterFalse++;
                 }
                 view.sendAnimation("right", animation1, counterFalse, counterTrue);
+
                 break;
         }
     }
@@ -106,6 +122,25 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
             }
         }
         return null;
+    }
+
+    public void playSound(int sound) {
+        switch (sound){
+            case 0:
+                soundPool.play(incorrectSound, 1, 1, 1, 0, 1f);
+                cleanUpIfEnd();
+
+                break;
+            case 1:
+                soundPool.play(correctSound, 1, 1, 1, 0, 1f);
+                cleanUpIfEnd();
+                break;
+        }
+    }
+
+    public final void cleanUpIfEnd() {
+        soundPool.release();
+        soundPool = null;
     }
 
     private void putIntoHashMap() {

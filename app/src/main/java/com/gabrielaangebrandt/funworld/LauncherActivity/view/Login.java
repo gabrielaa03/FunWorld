@@ -2,7 +2,9 @@ package com.gabrielaangebrandt.funworld.LauncherActivity.view;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -28,34 +30,62 @@ public class Login extends AppCompatActivity implements LauncherContract.Launche
     EditText username;
     LauncherContract.LauncherPresenter presenter;
     Realm realm;
+    public boolean isLogin = true;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_layout);
         ButterKnife.bind(this);
         presenter = new LauncherPresenterImpl(this);
-/*
-        final TextInputLayout text_input_layout1 = (TextInputLayout) findViewById(R.id.text_input_layout);
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        isLogin = prefs.getBoolean("Islogin", false);
+        if(isLogin)
+        {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
+        else {
+
+        }
+
+/*      final TextInputLayout text_input_layout1 = (TextInputLayout) findViewById(R.id.text_input_layout);
         final TextInputLayout text_input_layout2 = (TextInputLayout) findViewById(R.id.text_input_layout1);
         text_input_layout1.setHint("Username");
         text_input_layout2.setHint("Password");*/
 
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        presenter.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
     @OnClick(R.id.btn_login1)
     public void openMainActivity() {
         realm = DatabaseConfig.getRealmInstance();
-        Player user = realm.where(Player.class).equalTo("username", username.getText().toString()).findFirst();
-        if (password.getText().toString().equals("") || password.getText().toString() == null || username.getText().toString().equals("") || username.getText().toString() == null) {
+        Player user = realm.where(Player.class).equalTo("username", username.getText().toString()).equalTo("password", password.getText().toString()).findFirst();
+
+        if (password.getText().toString().equals("") || username.getText().toString().equals("")) {
             Toast.makeText(this, R.string.userDoesNotExists, Toast.LENGTH_LONG).show();
         } else {
-            if (password.getText().toString().equals(user.getPassword())) {
+            if ( user != null) {
+                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+                prefs.edit().putBoolean("Islogin", isLogin).apply();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             } else {
                 Toast.makeText(this, R.string.userDoesNotExists, Toast.LENGTH_LONG).show();
             }
         }
+
+
     }
 
     @OnClick(R.id.btn_register)

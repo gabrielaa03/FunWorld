@@ -1,5 +1,9 @@
 package com.gabrielaangebrandt.funworld.LauncherActivity.presenter;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+
 import com.gabrielaangebrandt.funworld.LauncherActivity.LauncherContract;
 import com.gabrielaangebrandt.funworld.LauncherActivity.view.Login;
 

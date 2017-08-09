@@ -1,6 +1,9 @@
 package com.gabrielaangebrandt.funworld.MainActivity.view;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -8,7 +11,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 
+import com.gabrielaangebrandt.funworld.LauncherActivity.view.Login;
 import com.gabrielaangebrandt.funworld.MainActivity.fragments.FragmentCountries;
 import com.gabrielaangebrandt.funworld.MainActivity.fragments.FragmentGames;
 import com.gabrielaangebrandt.funworld.R;
@@ -40,6 +46,25 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
                 tabLayout));
         setUpViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.sign_out_button, menu);
+        return super.onCreateOptionsMenu(menu);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.mybutton) {
+            SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+            prefs.edit().putBoolean("Islogin", false).apply();
+            Intent intent = new Intent(this, Login.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

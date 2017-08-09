@@ -57,7 +57,8 @@
     <string name="cancel">CANCEL</string>
     <string name="userDoesNotExists">Wrong password or username.</string>
     <string name="startgame">Do you want to play?</string>
-    <string name="successfullRegistration">Successfully registered. :)</string>/>
+    <string name="successfullRegistration">Successfully registered. :)</string>
+    <string name="emailIsNotValid">Email isn\'t valid.</string>/>
     <string-array name="countries1">
         <item>Albania</item>
         <item>Andorra</item>

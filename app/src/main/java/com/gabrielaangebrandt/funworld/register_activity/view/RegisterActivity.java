@@ -15,6 +15,9 @@ import com.gabrielaangebrandt.funworld.R;
 import com.gabrielaangebrandt.funworld.database.DatabaseConfig;
 import com.gabrielaangebrandt.funworld.models.data_model.Player;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -32,8 +35,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
     @BindView(R.id.spinner_choose_question) Spinner question;
     private String q;
 
-    // DbHelper dbHelper;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,6 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         question.setOnItemSelectedListener(this);
     }
 
-
   @OnClick(R.id.btn_register_player)
     void checkLoginData() {
       if (etName.getText().toString() == "" || etName.getText().toString().isEmpty() ||
@@ -57,29 +57,37 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
               etAnswer.getText().toString() == "" || etAnswer.getText().toString().isEmpty()) {
           Toast.makeText(this, getText(R.string.elementsArentEntered), Toast.LENGTH_LONG).show();
       } else {
-          if (etPassword1.getText().toString().equals(etPassword2.getText().toString())) {
+          String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
+          Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
+          Matcher matcher = pattern.matcher(etEmail.getText().toString());
+       if(matcher.matches()){
+           if (etPassword1.getText().toString().equals(etPassword2.getText().toString())) {
 
-              String name, username, pass, email, answer;
+               String name, username, pass, email, answer;
 
-              name = etName.getText().toString();
-              username = etUsername.getText().toString();
-              pass = etPassword1.getText().toString();
-              email = etEmail.getText().toString();
-              answer = etAnswer.getText().toString();
+               name = etName.getText().toString();
+               username = etUsername.getText().toString();
+               pass = etPassword1.getText().toString();
+               email = etEmail.getText().toString();
+               answer = etAnswer.getText().toString();
 
-              Player player = new Player(name, username, pass, email, q, answer);
-              Realm object = DatabaseConfig.getRealmInstance();
-              object.beginTransaction();
-              object.copyToRealmOrUpdate(player);
-              object.commitTransaction();
+               Player player = new Player(name, username, pass, email, q, answer);
+               Realm object = DatabaseConfig.getRealmInstance();
+               object.beginTransaction();
+               object.copyToRealmOrUpdate(player);
+               object.commitTransaction();
 
-              Toast.makeText(this, R.string.successfullRegistration, Toast.LENGTH_LONG).show();
-              Intent intent = new Intent(this, Login.class);
-              startActivity(intent);
+               Toast.makeText(this, R.string.successfullRegistration, Toast.LENGTH_LONG).show();
+               Intent intent = new Intent(this, Login.class);
+               startActivity(intent);
 
-          } else {
-              etPassword2.setError(getText(R.string.error_passwordsDontMatch));
-          }
+           } else {
+               etPassword2.setError(getText(R.string.error_passwordsDontMatch));
+           }
+          }else{
+           Toast.makeText(this, getText(R.string.emailIsNotValid), Toast.LENGTH_LONG).show();
+       }
+
       }
   }
     @Override

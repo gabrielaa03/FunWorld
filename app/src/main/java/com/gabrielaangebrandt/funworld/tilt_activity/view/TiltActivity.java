@@ -33,7 +33,7 @@ public class TiltActivity extends AppCompatActivity implements TiltContract.Tilt
     @BindView(R.id.iv_rightFlag) ImageView rightFlag;
     @BindView(R.id.tv_counryName) TextView tv_name;
     @BindView(R.id.tv_counter_false) TextView tv_false;
-    @BindView(R.id.tv_counter_right) TextView tv_true;
+    @BindView(R.id.tv_counter_true) TextView tv_true;
     private String leftF = "", rightF = ""; String nameFlag = "";
     private SensorManager sensorManager;
     private Sensor sensor;
@@ -77,14 +77,16 @@ public class TiltActivity extends AppCompatActivity implements TiltContract.Tilt
         switch (side) {
             case "left":
                 leftFlag.bringToFront();
-                leftFlag.startAnimation(animation);
+                presenter.playSound(1);/*
+                leftFlag.startAnimation(animation);*/
                 tv_false.setText(String.valueOf(counterFalse));
                 tv_true.setText(String.valueOf(counterTrue));
 
                 break;
             case "right":
                 rightFlag.bringToFront();
-                rightFlag.startAnimation(animation);
+                presenter.playSound(0);/*
+                rightFlag.startAnimation(animation);*/
                 tv_false.setText(String.valueOf(counterFalse));
                 tv_true.setText(String.valueOf(counterTrue));
 
@@ -115,7 +117,7 @@ public class TiltActivity extends AppCompatActivity implements TiltContract.Tilt
                         presenter.onStart();
 
                     }
-                }, 2000);
+                }, 1000);
 
             }
     }

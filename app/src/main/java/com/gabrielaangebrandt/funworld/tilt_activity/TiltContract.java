@@ -19,5 +19,6 @@ public interface TiltContract {
         void onStop();
 
         void checkAnswer(Context context,String side, String nameFlag);
+        void playSound(int soundID);
     }
 }

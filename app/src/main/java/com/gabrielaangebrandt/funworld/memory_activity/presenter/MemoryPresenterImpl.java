@@ -37,9 +37,9 @@ public class MemoryPresenterImpl implements MemoryContract.MemoryPresenter {
 
         definedDrawables.clear();
         numbers.clear();
+
         for(int i= 0; i<52; i++){
             numbers.add(i);
-            Log.d("tag", "ovo je " + i);
         }
         Collections.shuffle(numbers);
         for (int k = 0; k < 9; k++) {
