@@ -6,7 +6,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
-        android:id="@+id/iv_logo"/>
+        android:id="@+id/iv_logo1"/>
 
     <Button
         android:id="@+id/btn_memory"
@@ -17,7 +17,7 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
-        android:layout_below="@+id/iv_logo"
+        android:layout_below="@+id/iv_logo1"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <Button

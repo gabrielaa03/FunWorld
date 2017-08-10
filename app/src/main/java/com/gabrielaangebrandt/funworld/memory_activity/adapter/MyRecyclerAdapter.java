@@ -1,16 +1,13 @@
 package com.gabrielaangebrandt.funworld.memory_activity.adapter;
 
-import android.graphics.drawable.Drawable;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.gabrielaangebrandt.funworld.R;
+import com.gabrielaangebrandt.funworld.models.data_model.MemoryObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,8 +18,7 @@ import java.util.List;
  */
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.ViewHolder> {
 
-    List<Integer> drawables = new ArrayList<>();
-    private int clickCounter =0;
+    List<MemoryObject> objects = new ArrayList<>();
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -32,26 +28,22 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final List<Integer> first = new ArrayList<>();
-        final List<Integer> second = new ArrayList<>();
-        holder.setFlagDrawable(drawables.get(position));
+        holder.flag.setImageResource(R.drawable.back);
     }
 
     @Override
     public int getItemCount() {
-        return drawables.size();
+        return objects.size();
     }
 
-    public void addDataToAdapter(List<Integer> definedDrawables) {
-        drawables.clear();
-        drawables.addAll(definedDrawables);
+    public void addDataToAdapter(List<MemoryObject> definedDrawables) {
+        objects.clear();
+        objects.addAll(definedDrawables);
         notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        boolean isClicked = false;
         ImageView flag;
-        int flagDrawable;
 
         ViewHolder(View view) {
             super(view);
@@ -59,32 +51,24 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             flag.setOnClickListener(this);
         }
 
-        public void setFlagDrawable(int flagDrawable) {
-            this.flagDrawable = flagDrawable;
-        }
-
-        public void onClick(View v){
-            isClicked = !isClicked;
-            flag.setImageResource(isClicked ? flagDrawable : R.drawable.back);
-/*
-            if (clickCounter == 0) {
-                first.add(drawables.get(position));
-                clickCounter++;
-            } else if (clickCounter==1) {
-                second.add(drawables.get(position));
-
-                if (first.equals(second)) {
-                    Log.d("error" , "povecao se broj pronadjenih parova ");
-                    first.clear();
-                    second.clear();
-
-                } else {
-
+        public void onClick(View v) {
+            if (!objects.get(getAdapterPosition()).isMatched()) {
+                objects.get(getAdapterPosition()).setClicked(true);
+                flag.setImageResource(objects.get(getAdapterPosition()).isClicked() ? objects.get(getAdapterPosition()).getID() : R.drawable.back);
+                for (int i = 0; i < objects.size(); i++) {
+                    if (objects.get(i).isClicked() && !objects.get(i).isMatched() && (getAdapterPosition() != i)) {
+                        if (objects.get(i).getAlphaCode().equals(objects.get(getAdapterPosition()).getAlphaCode())) {
+                            objects.get(i).setMatched(true);
+                            objects.get(getAdapterPosition()).setMatched(true);
+                        } else {
+                            objects.get(i).setClicked(false);
+                            objects.get(getAdapterPosition()).setClicked(false);
+                            notifyItemChanged(i);
+                            notifyItemChanged(getAdapterPosition());
+                        }
+                    }
                 }
-
-                clickCounter = 0;
             }
-            */
         }
     }
 }

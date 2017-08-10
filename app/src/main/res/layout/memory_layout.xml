@@ -5,23 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
-        android:id="@+id/player1"
+        android:id="@+id/time"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="player1"/>
-    <TextView
-        android:id="@+id/player2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toEndOf="@+id/player1"
-        android:layout_alignParentEnd="true"
-        android:textAlignment="textEnd"
-        tools:text="player2"/>
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewMemory"
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/player1" />
+        android:layout_below="@+id/time" />
 </RelativeLayout>

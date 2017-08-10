@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.gabrielaangebrandt.funworld.LauncherActivity.view.Login">
     <ImageView
-        android:id="@+id/iv_logo"
+        android:id="@+id/iv_logo1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
@@ -20,7 +20,7 @@
         android:textSize="20sp"
         android:layout_marginTop="20dp"
         android:hint="@string/prompt_username"
-        android:layout_below="@+id/iv_logo"/>
+        android:layout_below="@+id/iv_logo1"/>
     <EditText
         android:id="@+id/et_password"
         android:layout_below="@+id/et_username"

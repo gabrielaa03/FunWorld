@@ -74,43 +74,30 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     public void onStop() {
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
     @Override
     public void checkAnswer(Context ctx, String side, String nameFlag) {
-        soundPool = new SoundPool.Builder()
-                .setMaxStreams(100)
-                .build();
-        correctSound = soundPool.load(ctx, R.raw.dustyroom_multimedia_correct_complete_bonus, 1);
-        incorrectSound = soundPool.load(ctx, R.raw.dustyroom_multimedia_incorrect_negative_tone, 1);
-        audioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
-
         String key = getKey(nameFlag);
+        addSound(ctx);
         switch (side) {
             case "leftFlag":
-                Animation animation;
                 assert key != null;
                 if (key.equals(left)) {
-                    animation = AnimationUtils.loadAnimation(ctx, R.anim.zoom_in_flag);
                     counterTrue++;
                 } else {
-                    animation = AnimationUtils.loadAnimation(ctx, R.anim.zoom_out);
                     counterFalse++;
                 }
-                view.sendAnimation("left", animation, counterFalse, counterTrue);
-
+                view.sendAnimation("left", counterFalse, counterTrue);
                 break;
+
             case "rightFlag":
-                Animation animation1;
                 assert key != null;
                 if (key.equals(right)) {
-                    animation1 = AnimationUtils.loadAnimation(ctx, R.anim.zoom_in_flag);
                     counterTrue++;
                 } else {
-                    animation1 = AnimationUtils.loadAnimation(ctx, R.anim.zoom_out);
                     counterFalse++;
                 }
-                view.sendAnimation("right", animation1, counterFalse, counterTrue);
-
+                view.sendAnimation("right", counterFalse, counterTrue);
                 break;
         }
     }
@@ -128,21 +115,23 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
         switch (sound){
             case 0:
                 soundPool.play(incorrectSound, 1, 1, 1, 0, 1f);
-                cleanUpIfEnd();
-
                 break;
             case 1:
                 soundPool.play(correctSound, 1, 1, 1, 0, 1f);
-                cleanUpIfEnd();
                 break;
         }
     }
 
-    public final void cleanUpIfEnd() {
-        soundPool.release();
-        soundPool = null;
-    }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private void addSound(Context ctx){
+        soundPool = new SoundPool.Builder()
+                .setMaxStreams(100)
+                .build();
+        correctSound = soundPool.load(ctx, R.raw.dustyroom_multimedia_correct_complete_bonus, 1);
+        incorrectSound = soundPool.load(ctx, R.raw.dustyroom_multimedia_incorrect_negative_tone, 1);
+        audioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
 
+    }
     private void putIntoHashMap() {
         hashmap.put("al", "Albania");
         hashmap.put("am", "Armenia");

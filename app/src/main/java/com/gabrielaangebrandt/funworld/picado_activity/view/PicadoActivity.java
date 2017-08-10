@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.security.Permission;
 import java.util.Map;
 
 import butterknife.BindView;
@@ -67,10 +68,10 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
         uiSettings.setZoomControlsEnabled(true);
         uiSettings.setMyLocationButtonEnabled(true);
         uiSettings.setZoomGesturesEnabled(true);
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission) != PackageManager.PERMISSION_GRANTED) {
+      /*  if (ActivityCompat.checkSelfPermission(this, Perm) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling ActivityCompat#requestPermissions
             return;
-        }
+        }*/
         this.googleMap.setMyLocationEnabled(true);
     }
 }

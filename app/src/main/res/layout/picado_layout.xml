@@ -8,7 +8,7 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="@color/realRed"/>
-    <fragment
+    <FrameLayout
         android:id="@+id/f_googleMap"
         android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"

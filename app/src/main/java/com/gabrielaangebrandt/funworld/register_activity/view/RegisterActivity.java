@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 import com.gabrielaangebrandt.funworld.LauncherActivity.view.Login;
 import com.gabrielaangebrandt.funworld.R;
-import com.gabrielaangebrandt.funworld.database.DatabaseConfig;
+import com.gabrielaangebrandt.funworld.models.database.DatabaseConfig;
 import com.gabrielaangebrandt.funworld.models.data_model.Player;
 
 import java.util.regex.Matcher;

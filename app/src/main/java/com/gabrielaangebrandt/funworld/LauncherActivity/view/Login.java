@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -14,7 +15,7 @@ import com.gabrielaangebrandt.funworld.LauncherActivity.LauncherContract;
 import com.gabrielaangebrandt.funworld.LauncherActivity.presenter.LauncherPresenterImpl;
 import com.gabrielaangebrandt.funworld.MainActivity.view.MainActivity;
 import com.gabrielaangebrandt.funworld.R;
-import com.gabrielaangebrandt.funworld.database.DatabaseConfig;
+import com.gabrielaangebrandt.funworld.models.database.DatabaseConfig;
 import com.gabrielaangebrandt.funworld.models.data_model.Player;
 import com.gabrielaangebrandt.funworld.register_activity.view.RegisterActivity;
 
@@ -30,6 +31,8 @@ public class Login extends AppCompatActivity implements LauncherContract.Launche
     EditText username;
     LauncherContract.LauncherPresenter presenter;
     Realm realm;
+    TextInputLayout text_input_layout1;
+    TextInputLayout text_input_layout2;
     public boolean isLogin = true;
 
     @Override
@@ -49,8 +52,8 @@ public class Login extends AppCompatActivity implements LauncherContract.Launche
 
         }
 
-/*      final TextInputLayout text_input_layout1 = (TextInputLayout) findViewById(R.id.text_input_layout);
-        final TextInputLayout text_input_layout2 = (TextInputLayout) findViewById(R.id.text_input_layout1);
+        /*text_input_layout1= (TextInputLayout) findViewById(R.id.text_input_layout);
+        text_input_layout2= (TextInputLayout) findViewById(R.id.text_input_layout1);
         text_input_layout1.setHint("Username");
         text_input_layout2.setHint("Password");*/
 

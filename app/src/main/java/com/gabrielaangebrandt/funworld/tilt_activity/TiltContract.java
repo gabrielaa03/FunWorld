@@ -12,7 +12,7 @@ public interface TiltContract {
 
         void sendNumbers(String left, String right, String top);
 
-        void sendAnimation(String side, Animation animation, int counterFalse, int counterTrue);
+        void sendAnimation(String side, int counterFalse, int counterTrue);
     }
     interface  TiltPresenter{
         void onStart();

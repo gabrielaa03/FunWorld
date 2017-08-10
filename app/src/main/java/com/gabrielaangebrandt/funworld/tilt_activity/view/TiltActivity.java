@@ -1,16 +1,18 @@
 package com.gabrielaangebrandt.funworld.tilt_activity.view;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.OrientationEventListener;
 import android.view.View;
-import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -26,7 +28,7 @@ import butterknife.OnClick;
  * Created by Gabriela on 23.7.2017..
  */
 
-public class TiltActivity extends AppCompatActivity implements TiltContract.TiltView {
+public class TiltActivity extends AppCompatActivity implements SensorEventListener, TiltContract.TiltView {
 
     TiltContract.TiltPresenter presenter;
     @BindView(R.id.iv_leftFlag) ImageView leftFlag;
@@ -36,7 +38,9 @@ public class TiltActivity extends AppCompatActivity implements TiltContract.Tilt
     @BindView(R.id.tv_counter_true) TextView tv_true;
     private String leftF = "", rightF = ""; String nameFlag = "";
     private SensorManager sensorManager;
-    private Sensor sensor;
+    private Sensor accelerometer;
+    private Sensor magnetometer;
+    OrientationEventListener orientationListener;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,10 +48,22 @@ public class TiltActivity extends AppCompatActivity implements TiltContract.Tilt
         setContentView(R.layout.tilt_layout);
         ButterKnife.bind(this);
         presenter = new TiltPresenterImpl(this);
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        sensor = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+
         tv_false.setText("0");
         tv_true.setText("0");
+        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+        accelerometer = sensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
+        magnetometer = sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
+        orientationListener = createOrientationListener();
+        orientationListener.enable();
+    }
+
+    private OrientationEventListener createOrientationListener() {
+        return new OrientationEventListener(this) {
+            public void onOrientationChanged(int orientation) {
+                System.out.println("orientation................."+orientation);
+            }
+        };
     }
 
     @Override
@@ -60,6 +76,7 @@ public class TiltActivity extends AppCompatActivity implements TiltContract.Tilt
     protected void onStop() {
         super.onStop();
         presenter.onStop();
+        orientationListener.disable();
     }
 
     @Override
@@ -73,7 +90,7 @@ public class TiltActivity extends AppCompatActivity implements TiltContract.Tilt
     }
 
     @Override
-    public void sendAnimation(String side, Animation animation, final int counterFalse, final int counterTrue) {
+    public void sendAnimation(String side, final int counterFalse, final int counterTrue) {
         switch (side) {
             case "left":
                 leftFlag.bringToFront();
@@ -130,19 +147,18 @@ public class TiltActivity extends AppCompatActivity implements TiltContract.Tilt
     public void checkAnswer2(View view){
         presenter.checkAnswer(this,"rightFlag", nameFlag);
     }
-   /* @Override
+
+    @Override
     public void onSensorChanged(SensorEvent event) {
         float x = event.values[0];
         float y = event.values[1];
         if (Math.abs(x) > Math.abs(y)) {
-            if (y < 3) {
-                String leftSide = "left";
-                presenter.checkAnswer(leftSide, nameFlag);
+            if (x < 0) {
+                presenter.checkAnswer(this,"leftFlag", nameFlag);
                 Log.d("success", "You tilt the device left");
             }
-            if (y > 3) {
-                String rightSide = "right";
-                presenter.checkAnswer(rightSide, nameFlag);
+            if (x > 0) {
+                presenter.checkAnswer(this,"rightFlag", nameFlag);
                 Log.d("success", "You tilt the device right");
             }
         }
@@ -154,11 +170,18 @@ public class TiltActivity extends AppCompatActivity implements TiltContract.Tilt
 
     protected void onResume() {
         super.onResume();
-        sensorManager.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.registerListener(this, accelerometer, SensorManager.SENSOR_DELAY_NORMAL);
+        sensorManager.getDefaultSensor(Sensor.TYPE_MAGNETIC_FIELD);
     }
 
     protected void onPause() {
         super.onPause();
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
         sensorManager.unregisterListener(this);
-    }*/
+    }
 }

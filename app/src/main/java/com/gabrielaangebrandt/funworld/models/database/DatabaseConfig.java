@@ -1,4 +1,4 @@
-package com.gabrielaangebrandt.funworld.database;
+package com.gabrielaangebrandt.funworld.models.database;
 
 import android.app.Application;
 

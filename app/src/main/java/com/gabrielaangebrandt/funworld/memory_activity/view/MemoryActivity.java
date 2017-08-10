@@ -4,7 +4,6 @@ package com.gabrielaangebrandt.funworld.memory_activity.view;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.widget.TextView;
 
@@ -12,6 +11,7 @@ import com.gabrielaangebrandt.funworld.R;
 import com.gabrielaangebrandt.funworld.memory_activity.MemoryContract;
 import com.gabrielaangebrandt.funworld.memory_activity.adapter.MyRecyclerAdapter;
 import com.gabrielaangebrandt.funworld.memory_activity.presenter.MemoryPresenterImpl;
+import com.gabrielaangebrandt.funworld.models.data_model.MemoryObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,8 +25,8 @@ import butterknife.ButterKnife;
 
 public class MemoryActivity extends AppCompatActivity implements MemoryContract.MemoryView {
 
-    @BindView(R.id.player1)
-    TextView player1;
+    @BindView(R.id.time)
+    TextView time;
     @BindView(R.id.recyclerViewMemory) RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     MyRecyclerAdapter adapter;
@@ -60,10 +60,15 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
 
     @Override
     public void getDefinedDrawables(List<String> definedDrawables) {
-        List<Integer> identifiers = new ArrayList<>();
-        for(String name : definedDrawables){
-            identifiers.add(getResources().getIdentifier(name, "drawable", getPackageName()));
+        List<MemoryObject> objects = new ArrayList<>();
+        for(String s : definedDrawables){
+            objects.add(new MemoryObject(getResources().getIdentifier(s, "drawable", getPackageName()), false, false, s));
         }
-        adapter.addDataToAdapter(identifiers);
+        adapter.addDataToAdapter(objects);
+    }
+
+    @Override
+    public void sendTimeData(String format) {
+        time.setText(format);
     }
 }

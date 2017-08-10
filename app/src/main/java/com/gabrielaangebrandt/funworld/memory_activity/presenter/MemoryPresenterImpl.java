@@ -1,14 +1,24 @@
 package com.gabrielaangebrandt.funworld.memory_activity.presenter;
 
+import android.support.v7.view.menu.BaseMenuPresenter;
 import android.util.Log;
 
 import com.gabrielaangebrandt.funworld.memory_activity.MemoryContract;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Gabriela on 27.7.2017..
@@ -49,8 +59,21 @@ public class MemoryPresenterImpl implements MemoryContract.MemoryPresenter {
         Collections.shuffle(definedDrawables);
         view.getDefinedDrawables(definedDrawables);
 
-        //  compositeDisposable.add();
+        Observable.interval(0, 1, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<Long>() {
+                    @Override
+                    public void onNext(Long aLong) {
+                        long time = System.currentTimeMillis();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
+                        Date resultdate = new Date(time);
+                        view.sendTimeData(simpleDateFormat.format(resultdate));
+                    }
 
+                    @Override
+                    public void onError(Throwable e) {}
+
+                    @Override
+                    public void onComplete() {}
+                });
 
     }
 

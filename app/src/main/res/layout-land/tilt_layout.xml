@@ -40,6 +40,7 @@
         android:layout_height="wrap_content"
         tools:text="1"
         android:textSize="40sp"
+        android:layout_marginRight="8dp"
         android:textColor="@color/realRed"
         android:textAlignment="textEnd"
         android:layout_alignParentRight="true"
@@ -48,11 +49,11 @@
 
     <ImageView
         android:id="@+id/iv_leftFlag"
-        android:layout_width="320dp"
+        android:layout_width="318dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginLeft="1dp"
-        android:layout_marginRight="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
         android:layout_marginBottom="20dp"
         android:scaleType="centerCrop"
         android:layout_below="@+id/tv_counryName"
@@ -60,10 +61,10 @@
 
     <ImageView
         android:id="@+id/iv_rightFlag"
-        android:layout_width="320dp"
+        android:layout_width="318dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="1dp"
-        android:layout_marginRight="1dp"
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
         android:scaleType="centerCrop"
