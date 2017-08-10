@@ -1,7 +1,5 @@
 package com.gabrielaangebrandt.funworld.memory_activity;
 
-import com.gabrielaangebrandt.funworld.models.data_model.MemoryObject;
-
 import java.util.List;
 
 /**
@@ -11,8 +9,9 @@ import java.util.List;
 public interface MemoryContract {
     interface MemoryView{
         void getDefinedDrawables(List<String> definedDrawables);
-
+        long getStartTime();
         void sendTimeData(String format);
+        void showScore();
     }
 
     interface MemoryPresenter{

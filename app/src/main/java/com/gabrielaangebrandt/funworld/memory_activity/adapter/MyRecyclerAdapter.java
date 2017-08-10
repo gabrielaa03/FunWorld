@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.gabrielaangebrandt.funworld.R;
+import com.gabrielaangebrandt.funworld.memory_activity.MemoryContract;
 import com.gabrielaangebrandt.funworld.models.data_model.MemoryObject;
 
 import java.util.ArrayList;
@@ -19,6 +20,12 @@ import java.util.List;
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.ViewHolder> {
 
     List<MemoryObject> objects = new ArrayList<>();
+    private int counter;
+    private MemoryContract.MemoryView listener;
+
+    public MyRecyclerAdapter(MemoryContract.MemoryView listener){
+        this.listener = listener;
+    }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -69,6 +76,15 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                     }
                 }
             }
+            for(MemoryObject object : objects){
+                if(object.isMatched())counter++;
+            }
+            if(counter==18){
+                listener.showScore();
+            }else{
+                counter=0;
+            }
+
         }
     }
 }

@@ -15,17 +15,23 @@ public class Player extends RealmObject {
     private String question;
     private String email;
     private String answer;
+    private int hsMemory;
+    private int hsPicado;
+    private int hsTilt;
+
+    public Player(String username, String name, String password, String question, String email, String answer, int hsMemory, int hsPicado, int hsTilt) {
+        this.username = username;
+        this.name = name;
+        this.password = password;
+        this.question = question;
+        this.email = email;
+        this.answer = answer;
+        this.hsMemory = hsMemory;
+        this.hsPicado = hsPicado;
+        this.hsTilt = hsTilt;
+    }
 
     public Player(){}
-
-    public Player(String name, String username, String password, String email, String question, String answer){
-        this.name = name;
-        this.username = username;
-        this.password = password;
-        this.email= email;
-        this.question = question;
-        this.answer = answer;
-    }
 
     public String getName() {
         return name;
@@ -75,4 +81,27 @@ public class Player extends RealmObject {
         this.answer = answer;
     }
 
+    public int getHsMemory() {
+        return hsMemory;
+    }
+
+    public void setHsMemory(int hsMemory) {
+        this.hsMemory = hsMemory;
+    }
+
+    public int getHsPicado() {
+        return hsPicado;
+    }
+
+    public void setHsPicado(int hsPicado) {
+        this.hsPicado = hsPicado;
+    }
+
+    public int getHsTilt() {
+        return hsTilt;
+    }
+
+    public void setHsTilt(int hsTilt) {
+        this.hsTilt = hsTilt;
+    }
 }

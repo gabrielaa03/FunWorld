@@ -82,6 +82,8 @@ public class Login extends AppCompatActivity implements LauncherContract.Launche
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
                 prefs.edit().putBoolean("Islogin", isLogin).apply();
                 Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("username", username.getText().toString());
+                intent.putExtra("password", password.getText().toString());
                 startActivity(intent);
             } else {
                 Toast.makeText(this, R.string.userDoesNotExists, Toast.LENGTH_LONG).show();

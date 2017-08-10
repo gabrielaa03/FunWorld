@@ -71,7 +71,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                email = etEmail.getText().toString();
                answer = etAnswer.getText().toString();
 
-               Player player = new Player(name, username, pass, email, q, answer);
+               Player player = new Player(name, username, pass, email, q, answer, 0, 0, 0);
                Realm object = DatabaseConfig.getRealmInstance();
                object.beginTransaction();
                object.copyToRealmOrUpdate(player);

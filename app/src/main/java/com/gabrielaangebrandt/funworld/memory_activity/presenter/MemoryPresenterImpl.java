@@ -1,8 +1,5 @@
 package com.gabrielaangebrandt.funworld.memory_activity.presenter;
 
-import android.support.v7.view.menu.BaseMenuPresenter;
-import android.util.Log;
-
 import com.gabrielaangebrandt.funworld.memory_activity.MemoryContract;
 
 import java.text.SimpleDateFormat;
@@ -11,12 +8,11 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
+import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -29,7 +25,7 @@ public class MemoryPresenterImpl implements MemoryContract.MemoryPresenter {
     private List<Integer> numbers = new ArrayList<>();
     private List<String> definedDrawables = new ArrayList<>();
     private List<String> drawables;
-    Random random = new Random();
+    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public MemoryPresenterImpl(MemoryContract.MemoryView view) {
         this.view = view;
@@ -37,6 +33,7 @@ public class MemoryPresenterImpl implements MemoryContract.MemoryPresenter {
 
     @Override
     public void onStart() {
+        final long startTime = view.getStartTime();
         drawables = Arrays.asList(
                 "al", "am", "ad", "at", "az", "ba", "bg", "be", "by", "ch", "cy",
                 "cz", "dk", "de", "fi", "fr", "gr", "gb", "ge",
@@ -59,12 +56,12 @@ public class MemoryPresenterImpl implements MemoryContract.MemoryPresenter {
         Collections.shuffle(definedDrawables);
         view.getDefinedDrawables(definedDrawables);
 
-        Observable.interval(0, 1, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<Long>() {
+        compositeDisposable.add(Observable.interval(0, 1, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<Long>() {
                     @Override
                     public void onNext(Long aLong) {
-                        long time = System.currentTimeMillis();
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("hh:mm:ss");
-                        Date resultdate = new Date(time);
+                        long currentTime = System.currentTimeMillis();
+                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+                        Date resultdate = new Date(currentTime-startTime);
                         view.sendTimeData(simpleDateFormat.format(resultdate));
                     }
 
@@ -73,12 +70,11 @@ public class MemoryPresenterImpl implements MemoryContract.MemoryPresenter {
 
                     @Override
                     public void onComplete() {}
-                });
-
+                }));
     }
 
     @Override
     public void onStop() {
+        compositeDisposable.dispose();
     }
-
 }
