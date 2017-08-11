@@ -1,5 +1,6 @@
 package com.gabrielaangebrandt.funworld.memory_activity.presenter;
 
+import com.gabrielaangebrandt.funworld.base.BaseImpl;
 import com.gabrielaangebrandt.funworld.memory_activity.MemoryContract;
 
 import java.text.SimpleDateFormat;
@@ -20,12 +21,11 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Gabriela on 27.7.2017..
  */
 
-public class MemoryPresenterImpl implements MemoryContract.MemoryPresenter {
+public class MemoryPresenterImpl extends BaseImpl implements MemoryContract.MemoryPresenter {
     private MemoryContract.MemoryView view;
     private List<Integer> numbers = new ArrayList<>();
     private List<String> definedDrawables = new ArrayList<>();
     private List<String> drawables;
-    private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
     public MemoryPresenterImpl(MemoryContract.MemoryView view) {
         this.view = view;
@@ -56,7 +56,7 @@ public class MemoryPresenterImpl implements MemoryContract.MemoryPresenter {
         Collections.shuffle(definedDrawables);
         view.getDefinedDrawables(definedDrawables);
 
-        compositeDisposable.add(Observable.interval(0, 1, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<Long>() {
+        addObserver(Observable.interval(0, 1, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<Long>() {
                     @Override
                     public void onNext(Long aLong) {
                         long currentTime = System.currentTimeMillis();
@@ -75,6 +75,6 @@ public class MemoryPresenterImpl implements MemoryContract.MemoryPresenter {
 
     @Override
     public void onStop() {
-        compositeDisposable.dispose();
+       disposeCompositeD();
     }
 }

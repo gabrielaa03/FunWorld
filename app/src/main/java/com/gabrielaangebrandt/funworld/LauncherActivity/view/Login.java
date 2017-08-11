@@ -1,6 +1,7 @@
 package com.gabrielaangebrandt.funworld.LauncherActivity.view;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -41,7 +42,7 @@ public class Login extends AppCompatActivity implements LauncherContract.Launche
         setContentView(R.layout.activity_login_layout);
         ButterKnife.bind(this);
         presenter = new LauncherPresenterImpl(this);
-        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+         /*SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
         isLogin = prefs.getBoolean("Islogin", false);
         if(isLogin)
         {
@@ -50,7 +51,7 @@ public class Login extends AppCompatActivity implements LauncherContract.Launche
         }
         else {
 
-        }
+        }*/
 
         /*text_input_layout1= (TextInputLayout) findViewById(R.id.text_input_layout);
         text_input_layout2= (TextInputLayout) findViewById(R.id.text_input_layout1);
@@ -79,18 +80,14 @@ public class Login extends AppCompatActivity implements LauncherContract.Launche
             Toast.makeText(this, R.string.userDoesNotExists, Toast.LENGTH_LONG).show();
         } else {
             if ( user != null) {
-                SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-                prefs.edit().putBoolean("Islogin", isLogin).apply();
+                setDefaults("username", username.getText().toString(), this);
+                setDefaults("password", password.getText().toString(), this);
                 Intent intent = new Intent(this, MainActivity.class);
-                intent.putExtra("username", username.getText().toString());
-                intent.putExtra("password", password.getText().toString());
                 startActivity(intent);
             } else {
                 Toast.makeText(this, R.string.userDoesNotExists, Toast.LENGTH_LONG).show();
             }
         }
-
-
     }
 
     @OnClick(R.id.btn_register)
@@ -113,4 +110,15 @@ public class Login extends AppCompatActivity implements LauncherContract.Launche
         super.onDestroy();
     }
 
+    public static void setDefaults(String key, String value, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(key, value);
+        editor.apply();
+    }
+
+    public static String getDefaults(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getString(key, null);
+    }
 }

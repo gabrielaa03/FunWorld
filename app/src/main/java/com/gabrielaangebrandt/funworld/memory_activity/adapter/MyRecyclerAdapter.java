@@ -81,6 +81,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             }
             if(counter==18){
                 listener.showScore();
+                counter=0;
             }else{
                 counter=0;
             }

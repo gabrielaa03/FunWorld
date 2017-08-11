@@ -8,10 +8,11 @@
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:textColor="@color/realRed"/>
-    <FrameLayout
-        android:id="@+id/f_googleMap"
-        android:name="com.google.android.gms.maps.MapFragment"
+    <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_below="@+id/tv_highscore"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:id="@+id/f_google_map"
+        tools:context=".MapsActivity"
+        android:name="com.google.android.gms.maps.SupportMapFragment" />
 </RelativeLayout>

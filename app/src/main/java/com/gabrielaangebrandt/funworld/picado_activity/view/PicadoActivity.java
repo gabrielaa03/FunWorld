@@ -4,13 +4,16 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.app.AppCompatActivity;
 
 import com.gabrielaangebrandt.funworld.Manifest;
 import com.gabrielaangebrandt.funworld.R;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
@@ -27,7 +30,7 @@ import butterknife.OnClick;
  * Created by Gabriela on 23.7.2017..
  */
 
-public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class PicadoActivity extends FragmentActivity implements OnMapReadyCallback {
     GoogleMap googleMap;
     MapFragment mapFragment;
     private GoogleMap.OnMapClickListener mCustomOnMapClickListener;
@@ -36,19 +39,8 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.picado_layout);
-        mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.f_googleMap);
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.f_google_map);
         mapFragment.getMapAsync(this);
-        this.mCustomOnMapClickListener = new GoogleMap.OnMapClickListener() {
-            @Override
-            public void onMapClick(LatLng latLng) {
-                MarkerOptions newMarkerOptions = new MarkerOptions();
-                newMarkerOptions.icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_launcher));
-                newMarkerOptions.title("My place");
-                newMarkerOptions.snippet("I declare this my teritory!");
-                newMarkerOptions.position(latLng);
-                googleMap.addMarker(newMarkerOptions);
-            }
-        };
     }
 
     @Override
@@ -64,14 +56,9 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     public void onMapReady(GoogleMap googleMap) {
         this.googleMap = googleMap;
-        UiSettings uiSettings = this.googleMap.getUiSettings();
-        uiSettings.setZoomControlsEnabled(true);
-        uiSettings.setMyLocationButtonEnabled(true);
-        uiSettings.setZoomGesturesEnabled(true);
-      /*  if (ActivityCompat.checkSelfPermission(this, Perm) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling ActivityCompat#requestPermissions
-            return;
-        }*/
-        this.googleMap.setMyLocationEnabled(true);
+
+        LatLng sydney = new LatLng(-34, 151);
+        googleMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
     }
 }
