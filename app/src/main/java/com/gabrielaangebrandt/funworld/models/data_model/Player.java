@@ -16,10 +16,10 @@ public class Player extends RealmObject {
     private String email;
     private String answer;
     private long hsMemory;
-    private int hsPicado;
+    private double hsPicado;
     private int hsTilt;
 
-    public Player(String username, String name, String password, String question, String email, String answer, long hsMemory, int hsPicado, int hsTilt) {
+    public Player(String username, String name, String password, String question, String email, String answer, long hsMemory, double hsPicado, int hsTilt) {
         this.username = username;
         this.name = name;
         this.password = password;
@@ -88,8 +88,11 @@ public class Player extends RealmObject {
     public void setHsMemory(long hsMemory) {
         this.hsMemory = hsMemory;}
 
+    public double getHsPicado() {
+        return hsPicado;
+    }
 
-    public void setHsPicado(int hsPicado) {
+    public void setHsPicado(double hsPicado) {
         this.hsPicado = hsPicado;
     }
 

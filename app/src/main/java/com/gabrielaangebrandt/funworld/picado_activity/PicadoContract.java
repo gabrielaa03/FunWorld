@@ -5,9 +5,15 @@ package com.gabrielaangebrandt.funworld.picado_activity;
  */
 
 public interface PicadoContract {
-    interface PicadoView {}
+    interface PicadoView {
+        long sendStartTime();
+        void getTime(String format);
+        void sendCityName(String country);
+        void showScore(double score);
+    }
 
     interface PicadoPresenter{
+        void checkIfCoordinatesAreCorrect(String coordinates, String city, long timeInLong);
         void onStart();
         void onStop();
     }

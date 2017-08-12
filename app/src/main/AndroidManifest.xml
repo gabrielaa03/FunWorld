@@ -51,14 +51,14 @@
             android:name=".picado_activity.view.PicadoActivity"
             android:screenOrientation="landscape"
             android:parentActivityName=".MainActivity.view.MainActivity">
-            <meta-data
-                android:name="com.google.android.gms.version"
-                android:value="@integer/google_play_services_version"/>
-            <meta-data
-                android:name="com.google.android.geo.API_KEY"
-                android:value="AIzaSyD2rgN3gm5RRgXDLkovc3uGpsLo2JGDSzI"/>
-        </activity>
 
+        </activity>
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyD2rgN3gm5RRgXDLkovc3uGpsLo2JGDSzI"/>
     </application>
 
 </manifest>
