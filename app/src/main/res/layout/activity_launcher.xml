@@ -20,6 +20,5 @@
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_below="@+id/iv_startPicture"
-        android:visibility="gone"
         android:progress="25"/>
 </RelativeLayout>

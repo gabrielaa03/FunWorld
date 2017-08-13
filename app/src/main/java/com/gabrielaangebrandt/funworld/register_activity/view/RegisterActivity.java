@@ -11,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.gabrielaangebrandt.funworld.R;
+import com.gabrielaangebrandt.funworld.base.SharedPrefs;
 import com.gabrielaangebrandt.funworld.login_activity.view.Login;
 import com.gabrielaangebrandt.funworld.models.data_model.Player;
 import com.gabrielaangebrandt.funworld.models.database.DatabaseConfig;
@@ -77,7 +78,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                         object.beginTransaction();
                         object.copyToRealmOrUpdate(player);
                         object.commitTransaction();
-
+                        SharedPrefs.setDefaults("name", etName.getText().toString(), this);
                         Toast.makeText(this, R.string.successfullRegistration, Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(this, Login.class);
                         startActivity(intent);
@@ -92,6 +93,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 Toast.makeText(this, R.string.playerAlreadyExists, Toast.LENGTH_LONG).show();
             }
         }
+
     }
 
     @Override

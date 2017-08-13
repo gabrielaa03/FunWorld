@@ -17,12 +17,14 @@ import com.gabrielaangebrandt.funworld.base.SharedPrefs;
 import com.gabrielaangebrandt.funworld.login_activity.view.Login;
 import com.gabrielaangebrandt.funworld.main_activity.fragments.FragmentCountries;
 import com.gabrielaangebrandt.funworld.main_activity.fragments.FragmentGames;
+import com.gabrielaangebrandt.funworld.models.data_model.Player;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.realm.Realm;
 
 
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
@@ -39,7 +41,11 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         ButterKnife.bind(this);
         tabLayout.setTabTextColors(ContextCompat.getColor(this, R.color.white), ContextCompat.getColor(this, R.color.colorAccent));
         tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
-
+        Realm realm = Realm.getDefaultInstance();
+        Player player = realm.where(Player.class).equalTo("username", SharedPrefs.getDefaults("username", this)).findFirst();
+        if(player !=null){
+            setTitle("Welcome, " + player.getName());
+        }
         pagerAdapter = new fragmentPagerAdapter(getSupportFragmentManager());
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(
                 tabLayout));
@@ -58,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.mybutton) {
-            SharedPrefs.setDefaults("isLoggedIn", "false", this);
+            SharedPrefs.setDefaults("isLoggedIn", "out", this);
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
         }

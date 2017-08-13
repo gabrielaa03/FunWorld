@@ -3,11 +3,19 @@ package com.gabrielaangebrandt.funworld.picado_activity.presenter;
 import com.gabrielaangebrandt.funworld.base.BaseImpl;
 import com.gabrielaangebrandt.funworld.picado_activity.PicadoContract;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
+
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.observers.DisposableObserver;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * Created by Plava tvornica on 28.7.2017..
@@ -30,13 +38,12 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
         final long startTime = view.sendStartTime();
         chooseCity();
         fillUpHashMap();
-   /*     addObserver(Observable.interval(1, 0, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()
-        ).subscribeWith(new DisposableObserver<Long>() {
+        addObserver(Observable.interval(0, 1, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<Long>() {
             @Override
             public void onNext(Long aLong) {
                 long currentTime = System.currentTimeMillis();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ss");
-                Date resultdate = new Date(currentTime - startTime);
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ssss");
+                Date resultdate = new Date(currentTime-startTime);
                 view.getTime(simpleDateFormat.format(resultdate));
             }
 
@@ -45,7 +52,7 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
 
             @Override
             public void onComplete() {}
-        }));*/
+        }));
     }
 
 

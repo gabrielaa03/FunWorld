@@ -3,7 +3,6 @@ package com.gabrielaangebrandt.funworld.launcher_activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.ProgressBar;
 
 import com.gabrielaangebrandt.funworld.R;
@@ -21,12 +20,10 @@ public class LauncherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
-        progressBar.setVisibility(View.VISIBLE);
-        progressBar.setMax(50);
-        if(SharedPrefs.getDefaults("isLoggedIn", this).equals(true)){
+        if(SharedPrefs.getDefaults("isLoggedIn", this).equals("in")){
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        }else if(SharedPrefs.getDefaults("isLoggedIn", this).equals(false)){
+        }else if(SharedPrefs.getDefaults("isLoggedIn", this).equals("out")){
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
         }

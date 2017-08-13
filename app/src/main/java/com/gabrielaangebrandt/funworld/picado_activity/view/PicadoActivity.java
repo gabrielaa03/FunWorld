@@ -19,6 +19,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
@@ -59,7 +60,6 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
         this.mapFragment = (MapFragment) getFragmentManager().findFragmentById(R.id.f_google_map);
         this.mapFragment.getMapAsync(this);
         this.mCustomOnMapClickListener = new GoogleMap.OnMapClickListener() {
-
             @Override
             public void onMapClick(LatLng latLng) {
                 if (marker != null) {
@@ -95,7 +95,11 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
                 != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(EUROPE,0));
+      /*  googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(55.70, 13.19)));*/
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(new LatLng(55.70, 13.19)).zoom(15).build();
+        googleMap.animateCamera(CameraUpdateFactory
+                .newCameraPosition(cameraPosition));
     }
 
     @Override
@@ -128,7 +132,6 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
                 user.setHsPicado(score);
             }
         }
-
         Player realmUser = realm.copyToRealmOrUpdate(user);
         realm.commitTransaction();
 

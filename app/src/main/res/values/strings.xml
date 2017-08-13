@@ -61,7 +61,8 @@
     <string name="emailIsNotValid">Email isn\'t valid.</string>
     <string name="wrongQuestion">You have choosen wrong question.</string>
     <string name="wrongAnswer">Wrong answer.</string>
-    <string name="playerAlreadyExists">This username is already taken.</string>/>
+    <string name="playerAlreadyExists">This username is already taken.</string>
+    <string name="welcome">Welcome,</string>/>
     <string-array name="countries1">
         <item>Albania</item>
         <item>Andorra</item>
