@@ -7,7 +7,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:name=".models.database.DatabaseConfig"
@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LauncherActivity.view.Login">
+        <activity android:name=".login_activity.view.Login">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,40 +25,46 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity.view.MainActivity"
+            android:name=".main_activity.view.MainActivity"
             android:label="@string/app_name" />
         <activity
             android:name=".register_activity.view.RegisterActivity"
             android:label="@string/app_name"
-            android:parentActivityName=".LauncherActivity.view.Login" />
+            android:parentActivityName=".login_activity.view.Login" />
         <activity
-            android:name=".ForgottenPassword.view.ForgottenPassword"
+            android:name=".forgotten_password_activity.view.ForgottenPassword"
             android:label="@string/app_name"
             android:parentActivityName=".register_activity.view.RegisterActivity" />
         <activity
-            android:name=".OneCoutryViewActivity.view.CountryDetails"
-            android:screenOrientation="portrait"
-            android:parentActivityName=".MainActivity.view.MainActivity" />
+            android:name=".one_coutry_activity.view.CountryDetails"
+            android:parentActivityName=".main_activity.view.MainActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".memory_activity.view.MemoryActivity"
-            android:parentActivityName=".MainActivity.view.MainActivity"/>
+            android:parentActivityName=".main_activity.view.MainActivity" />
         <activity
             android:name=".tilt_activity.view.TiltActivity"
-            android:screenOrientation="landscape"
-            android:parentActivityName=".MainActivity.view.MainActivity" />
-
+            android:parentActivityName=".main_activity.view.MainActivity"
+            android:screenOrientation="landscape" />
         <activity
             android:name=".picado_activity.view.PicadoActivity"
-            android:screenOrientation="landscape"
-            android:parentActivityName=".MainActivity.view.MainActivity">
+            android:parentActivityName=".main_activity.view.MainActivity"
+            android:screenOrientation="landscape"></activity>
 
-        </activity>
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyD2rgN3gm5RRgXDLkovc3uGpsLo2JGDSzI"/>
+            android:value="AIzaSyD2rgN3gm5RRgXDLkovc3uGpsLo2JGDSzI" />
+
+        <activity android:name=".launcher_activity.LauncherActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

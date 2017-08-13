@@ -59,6 +59,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
         }
 
         public void onClick(View v) {
+            //na klik elementa u recycleru provjeri je li on već pronašao svog para, ako niji postavi da je kliknut
+            //zatim prikaži zastavu. Nakon toga prođi kroz cijeli niz i pogledaj postoji li još jedna zastava koja je kliknuta
+            //Ako postoji provjeri jesu li zastave na tim mjestima jednake preko alphaCoda, ako jesu postavi ih na isMatched(),
+            //ako nisu postavi isClicked na false da se element vrati u početno stanje bez prikaza zastave
+            //Korišten je i counter da izbroji kad su svi elementi na isMatched() = true, to znaci da je partija gotova
             if (!objects.get(getAdapterPosition()).isMatched()) {
                 objects.get(getAdapterPosition()).setClicked(true);
                 flag.setImageResource(objects.get(getAdapterPosition()).isClicked() ? objects.get(getAdapterPosition()).getID() : R.drawable.back);
@@ -85,7 +90,6 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
             }else{
                 counter=0;
             }
-
         }
     }
 }

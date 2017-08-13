@@ -5,13 +5,10 @@ import android.media.AudioManager;
 import android.media.SoundPool;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 
 import com.gabrielaangebrandt.funworld.R;
-import com.gabrielaangebrandt.funworld.models.CountryInteractorImpl;
-import com.gabrielaangebrandt.funworld.models.interactors.CountryInteractor;
+import com.gabrielaangebrandt.funworld.models.interactors.country_interactor.CountryInteractorImpl;
+import com.gabrielaangebrandt.funworld.models.interactors.country_interactor.CountryInteractor;
 import com.gabrielaangebrandt.funworld.tilt_activity.TiltContract;
 import java.util.Arrays;
 import java.util.HashMap;

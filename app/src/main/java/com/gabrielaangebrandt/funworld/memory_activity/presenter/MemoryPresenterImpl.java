@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
@@ -33,7 +32,9 @@ public class MemoryPresenterImpl extends BaseImpl implements MemoryContract.Memo
 
     @Override
     public void onStart() {
+        //uzimam početno vrijeme
         final long startTime = view.getStartTime();
+        //definicija liste s alphacodovima
         drawables = Arrays.asList(
                 "al", "am", "ad", "at", "az", "ba", "bg", "be", "by", "ch", "cy",
                 "cz", "dk", "de", "fi", "fr", "gr", "gb", "ge",
@@ -41,10 +42,10 @@ public class MemoryPresenterImpl extends BaseImpl implements MemoryContract.Memo
                 "kz", "li", "lt", "lu", "lv", "md", "mc", "me",
                 "mk", "mt", "nl", "no", "ro", "pl", "pt", "ro",
                 "rs", "ru", "se", "si", "sk", "sm", "tr", "ua", "va");
-
+        //čišćenje cachea
         definedDrawables.clear();
         numbers.clear();
-
+        //popuni niz s 51 brojem, pokreni shuffle i odaberi prvih 8 koji će predstavljati indekse u drawables
         for(int i= 0; i<52; i++){
             numbers.add(i);
         }
@@ -55,7 +56,7 @@ public class MemoryPresenterImpl extends BaseImpl implements MemoryContract.Memo
         }
         Collections.shuffle(definedDrawables);
         view.getDefinedDrawables(definedDrawables);
-
+        //na pozadinskoj niti izvodi se "stoperica" s osvježavanjem svake sekunde
         addObserver(Observable.interval(0, 1, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<Long>() {
                     @Override
                     public void onNext(Long aLong) {

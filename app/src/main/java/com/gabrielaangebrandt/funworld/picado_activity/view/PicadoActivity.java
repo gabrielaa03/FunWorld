@@ -9,8 +9,8 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.gabrielaangebrandt.funworld.LauncherActivity.view.Login;
 import com.gabrielaangebrandt.funworld.R;
+import com.gabrielaangebrandt.funworld.base.SharedPrefs;
 import com.gabrielaangebrandt.funworld.models.data_model.Player;
 import com.gabrielaangebrandt.funworld.picado_activity.PicadoContract;
 import com.gabrielaangebrandt.funworld.picado_activity.presenter.PicadoPresenterImpl;
@@ -20,6 +20,7 @@ import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.UiSettings;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -46,6 +47,8 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
     PicadoContract.PicadoPresenter presenter;
     private GoogleMap.OnMapClickListener mCustomOnMapClickListener;
     private String timeFormat;
+    private LatLngBounds EUROPE = new LatLngBounds(
+            new LatLng(38.849975202462815, -16.69921875), new LatLng(49.11846681463632, 87.36328125));
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -92,7 +95,7 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
                 != PackageManager.PERMISSION_GRANTED) {
             return;
         }
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(74.525961, 15.255119)));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngBounds(EUROPE,0));
     }
 
     @Override
@@ -116,8 +119,8 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
     public void showScore(double score) {
         presenter.onStop();
         Realm realm = Realm.getDefaultInstance();
-        String username = Login.getDefaults("username", this);
-        String password = Login.getDefaults("password", this);
+        String username = SharedPrefs.getDefaults("username", this);
+        String password = SharedPrefs.getDefaults("password", this);
         realm.beginTransaction();
         Player user = realm.where(Player.class).equalTo("username", username).equalTo("password", password).findFirst();
         if(user != null){
@@ -143,8 +146,9 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
                     }
                 }).show();
     }
+
     public long getTimeInLong(){
-        SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
+        SimpleDateFormat sdf = new SimpleDateFormat("ss");
         Date dateObj= null;
         try {
             dateObj = sdf.parse(timeFormat);
