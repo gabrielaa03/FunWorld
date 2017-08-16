@@ -1,16 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context="com.gabrielaangebrandt.funworld.login_activity.view.Login">
+    android:layout_height="match_parent">
     <ImageView
         android:id="@+id/iv_logo1"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:src="@drawable/logo"
         />
+
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_input_layout"
         android:layout_width="match_parent"
@@ -18,7 +16,6 @@
         android:layout_below="@id/iv_logo1"
         android:hint="@string/prompt_username"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
         android:layout_marginTop="16dp">
 
         <EditText
@@ -27,31 +24,26 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:layout_marginTop="40dp"
-            android:layout_margin="16dp"
-            android:layout_below="@+id/iv_logo1"/>
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"/>
 
     </android.support.design.widget.TextInputLayout>
-
 
     <android.support.design.widget.TextInputLayout
         android:id="@+id/text_input_layout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/text_input_layout"
         android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:hint="@string/prompt_password"
-        android:layout_marginTop="16dp">
-
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/text_input_layout"
+        android:hint="@string/prompt_password">
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:inputType="textPassword"
-            android:layout_marginTop="40dp"
-            android:layout_margin="16dp"/>
-
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:textSize="20sp"/>
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -100,5 +92,4 @@
         android:layout_below="@+id/btn_register"
         android:clickable="true"
         android:background="@drawable/text_color"/>
-
 </RelativeLayout>

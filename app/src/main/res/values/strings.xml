@@ -30,8 +30,8 @@
     <string name="chooseQuestion">Choose one question for password recover:</string>
     <string name="example_answer">e.g. My mother\'s birthplace is Osijek.</string>
     <string-array name="questions">
-        <item>- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -</item>
-        <item>What is your mothers birthplace?</item>
+        <item>- - - - - - - - - - - - - - - - - - - - - - - - - - - - -</item>
+        <item>What is your mother\'s birthplace?</item>
         <item>What is the name of your first pet?</item>
         <item>What is the name of your primary school teacher?</item>
     </string-array>
@@ -43,7 +43,7 @@
     <string name="elementsArentEntered">You didn\'t enter all data.</string>
     <string name="forgottenPass">Forgot your password?</string>
     <string name="tvForgottenPass">If you have forgotten your password then choose question and answer it correctly.</string>
-    <string name="bForgottenPassword">Send me my password</string>/>
+    <string name="bForgottenPassword">Show me my password</string>/>
     <string name="toastEmailCannotBeSent">Email cannot be sent. Try again...</string>/>
     <string name="emailSubject">Your password for FunWorld</string>
     <string name="nazivRegije">Region: </string>
@@ -61,6 +61,7 @@
     <string name="emailIsNotValid">Email isn\'t valid.</string>
     <string name="wrongQuestion">You have choosen wrong question.</string>
     <string name="wrongAnswer">Wrong answer.</string>
+    <string name="prompt_answer">Answer</string>
     <string name="playerAlreadyExists">This username is already taken.</string>
     <string name="welcome">Welcome,</string>/>
     <string-array name="countries1">

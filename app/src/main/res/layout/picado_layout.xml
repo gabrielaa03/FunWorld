@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
     <TextView
-        android:id="@+id/tv_cName"
+        android:id="@+id/tv_Name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
@@ -18,7 +18,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/f_google_map"
-        android:layout_toEndOf="@id/tv_cName"
+        android:layout_toEndOf="@id/tv_Name"
         android:layout_alignParentRight="true"
         android:textSize="20sp"
         android:layout_marginRight="8dp"
@@ -31,6 +31,6 @@
         android:id="@+id/f_google_map"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_cName"
+        android:layout_below="@+id/tv_Name"
         android:name="com.google.android.gms.maps.MapFragment" />
 </RelativeLayout>

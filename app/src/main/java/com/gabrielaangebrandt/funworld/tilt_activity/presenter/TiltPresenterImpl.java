@@ -29,8 +29,8 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     private String left = "";
     private Random random = new Random();
     private int counterFalse = 0 , counterTrue = 0;
-    AudioManager audioManager;
-    SoundPool soundPool;
+    private AudioManager audioManager;
+    private SoundPool soundPool;
     int correctSound, incorrectSound;
 
     List<String> drawables = Arrays.asList(
@@ -70,7 +70,6 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     @Override
     public void onStop() {
     }
-
 
     @Override
     public void checkAnswer(Context ctx, String side, String nameFlag) {

@@ -42,7 +42,7 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
             @Override
             public void onNext(Long aLong) {
                 long currentTime = System.currentTimeMillis();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("ssss");
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
                 Date resultdate = new Date(currentTime-startTime);
                 view.getTime(simpleDateFormat.format(resultdate));
             }
@@ -73,6 +73,11 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
         view.sendCityName(cityNames.get(number));
     }
 
+    public String[] showRealCoordinatesOfCity(String cityName){
+        hashMapLatLngOfCities.get(cityName);
+        return hashMapLatLngOfCities.get(cityName).split(",");
+    }
+
     public void checkIfCoordinatesAreCorrect(String coordinates, String city, long timeInLong){
         hashMapLatLngOfCities.get(city);
         String[] trueValueParts = hashMapLatLngOfCities.get(city).split(",");
@@ -83,6 +88,8 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
         if(counter == 10){
             view.showScore(score+timeInLong);
             counter = 0;
+        }else{
+            chooseCity();
         }
     }
 

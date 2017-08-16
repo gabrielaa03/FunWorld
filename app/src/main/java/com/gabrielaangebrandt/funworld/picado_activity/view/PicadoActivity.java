@@ -2,14 +2,17 @@ package com.gabrielaangebrandt.funworld.picado_activity.view;
 
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.gabrielaangebrandt.funworld.R;
+import com.gabrielaangebrandt.funworld.base.Converter;
 import com.gabrielaangebrandt.funworld.base.SharedPrefs;
 import com.gabrielaangebrandt.funworld.models.data_model.Player;
 import com.gabrielaangebrandt.funworld.picado_activity.PicadoContract;
@@ -19,15 +22,19 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Handler;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,16 +47,14 @@ import io.realm.Realm;
 public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallback, PicadoContract.PicadoView{
     GoogleMap googleMap;
     MapFragment mapFragment;
-    Marker marker;
+    Marker marker, marker2;
     @BindView(R.id.tv_time)
     TextView time;
-    @BindView(R.id.tv_cName) TextView countryName;
-    String name;
+    @BindView(R.id.tv_Name) TextView countryName;
+    private String name;
     PicadoContract.PicadoPresenter presenter;
     private GoogleMap.OnMapClickListener mCustomOnMapClickListener;
     private String timeFormat;
-    private LatLngBounds EUROPE = new LatLngBounds(
-            new LatLng(38.849975202462815, -16.69921875), new LatLng(49.11846681463632, 87.36328125));
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,12 +67,12 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
         this.mCustomOnMapClickListener = new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
-                if (marker != null) {
-                    marker.remove();
-                }
-                marker = googleMap.addMarker(new MarkerOptions().position(new LatLng(latLng.latitude,
+                marker = googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker()).position(new LatLng(latLng.latitude,
                         latLng.longitude)));
-                presenter.checkIfCoordinatesAreCorrect(String.valueOf(latLng.latitude+latLng.longitude), name, getTimeInLong());
+                String[] trueValues =  presenter.showRealCoordinatesOfCity(name);
+                marker2 = googleMap.addMarker(new MarkerOptions().icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN)).position(new LatLng(Double.parseDouble(trueValues[0]),
+                        Double.parseDouble(trueValues[1]))));
+                presenter.checkIfCoordinatesAreCorrect(String.valueOf(latLng.latitude + ","+ latLng.longitude), name, Converter.getTimeInLong(timeFormat));
             }
         };
     }
@@ -89,17 +94,21 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
         this.googleMap = googleMap;
         UiSettings uiSettings = this.googleMap.getUiSettings();
         uiSettings.setZoomControlsEnabled(true);
-        uiSettings.setZoomGesturesEnabled(true);
-        this.googleMap.setOnMapClickListener(this.mCustomOnMapClickListener);
-        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            return;
+        try {
+            boolean success = googleMap.setMapStyle(
+                    MapStyleOptions.loadRawResourceStyle(
+                            this, R.raw.style_json));
+            if (!success) {
+                Log.e("error", "Style parsing failed.");
+            }
+        } catch (Resources.NotFoundException e) {
+            Log.e("error", "Can't find style. Error: ", e);
         }
-      /*  googleMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(55.70, 13.19)));*/
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(55.70, 13.19)).zoom(15).build();
-        googleMap.animateCamera(CameraUpdateFactory
-                .newCameraPosition(cameraPosition));
+
+        LatLngBounds EUROPE = new LatLngBounds(
+                new LatLng(35.88905007936091, -5.625), new LatLng(69.90011762668541,20.56640625));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(EUROPE.getCenter(), 3));
+        this.googleMap.setOnMapClickListener(this.mCustomOnMapClickListener);
     }
 
     @Override
@@ -108,9 +117,22 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
     }
 
     @Override
-    public void getTime(String timeFormat){
+    public void getTime(final String timeFormat){
+        if (marker != null || marker2 != null) {
+            marker.remove();
+            marker2.remove();
+        }
+
+        final android.os.Handler handler1 = new android.os.Handler();
+        handler1.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                time.setText(timeFormat);
+
+            }
+        }, 500);
         this.timeFormat = timeFormat;
-        time.setText(timeFormat);
+
     }
 
     @Override
@@ -128,15 +150,15 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
         realm.beginTransaction();
         Player user = realm.where(Player.class).equalTo("username", username).equalTo("password", password).findFirst();
         if(user != null){
-            if(user.getHsPicado() < score){
-                user.setHsPicado(score);
+            if(user.getHsPicado() > (int) score){
+                user.setHsPicado((int) score);
             }
         }
-        Player realmUser = realm.copyToRealmOrUpdate(user);
+        realm.copyToRealmOrUpdate(user);
         realm.commitTransaction();
 
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-        alertDialog.setMessage("Your score is:  " + score + "\n" +
+        alertDialog.setMessage("Your score is:  " + (int) score + "\n" +
                 "Your best score is : " + user.getHsPicado())
                 .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -148,18 +170,5 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
                         presenter.onStart();
                     }
                 }).show();
-    }
-
-    public long getTimeInLong(){
-        SimpleDateFormat sdf = new SimpleDateFormat("ss");
-        Date dateObj= null;
-        try {
-            dateObj = sdf.parse(timeFormat);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        long newScore = dateObj.getTime();
-        return Math.abs(newScore);
-
     }
 }

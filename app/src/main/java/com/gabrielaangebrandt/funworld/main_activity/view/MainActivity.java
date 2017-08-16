@@ -120,7 +120,12 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
 
     //onemogućiti back button
     @Override
-    public void onBackPressed() {}
+    public void onBackPressed() {
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory( Intent.CATEGORY_HOME );
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
+    }
 
     // funkcija za postavljanje adaptera za tabove
     private void setUpViewPager(ViewPager viewPager) {

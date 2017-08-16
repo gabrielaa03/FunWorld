@@ -42,7 +42,7 @@ public class MemoryPresenterImpl extends BaseImpl implements MemoryContract.Memo
                 "kz", "li", "lt", "lu", "lv", "md", "mc", "me",
                 "mk", "mt", "nl", "no", "ro", "pl", "pt", "ro",
                 "rs", "ru", "se", "si", "sk", "sm", "tr", "ua", "va");
-        //čišćenje cachea
+
         definedDrawables.clear();
         numbers.clear();
         //popuni niz s 51 brojem, pokreni shuffle i odaberi prvih 8 koji će predstavljati indekse u drawables

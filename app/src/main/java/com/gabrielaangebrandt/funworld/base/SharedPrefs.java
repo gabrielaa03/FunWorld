@@ -18,6 +18,6 @@ public class SharedPrefs {
 
     public static String getDefaults(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        return preferences.getString(key, null);
+        return preferences.getString(key, "out");
     }
 }

@@ -89,7 +89,7 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
     //prikaz rezultata u alert Dialogu
     public void showScore(){
         presenter.onStop();
-        Converter.getTimeInLong(format);
+        score = Converter.getTimeInLong(format);
         Realm realm = Realm.getDefaultInstance();
         String username = SharedPrefs.getDefaults("username", this);
         String password = SharedPrefs.getDefaults("password", this);
@@ -107,7 +107,7 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
 
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setMessage("Your score is:  " + format + "\n" +
-                            "Your best score is : " + timeFormat)
+                            "Your best score is : " + Converter.getLongtoTime(score))
                 .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();

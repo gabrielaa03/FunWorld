@@ -14,6 +14,7 @@ public interface PicadoContract {
 
     interface PicadoPresenter{
         void checkIfCoordinatesAreCorrect(String coordinates, String city, long timeInLong);
+        String[] showRealCoordinatesOfCity(String cityName);
         void onStart();
         void onStop();
     }

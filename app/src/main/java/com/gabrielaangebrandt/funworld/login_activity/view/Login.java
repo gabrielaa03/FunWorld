@@ -26,20 +26,13 @@ public class Login extends AppCompatActivity{
     EditText password;
     @BindView(R.id.et_username)
     EditText username;
-
     Realm realm;
-    TextInputLayout text_input_layout1;
-    TextInputLayout text_input_layout2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_layout);
         ButterKnife.bind(this);
-        /*text_input_layout1= (TextInputLayout) findViewById(R.id.text_input_layout);
-        text_input_layout2= (TextInputLayout) findViewById(R.id.text_input_layout1);
-        text_input_layout1.setHint("Username");
-        text_input_layout2.setHint("Password");*/
     }
 
     @Override

@@ -1,7 +1,9 @@
 package com.gabrielaangebrandt.funworld.forgotten_password_activity.view;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -49,16 +51,9 @@ public class ForgottenPassword extends AppCompatActivity{
         if(player != null) {
             if (player.getQuestion().equals(selectedItem)) {
                 if (player.getAnswer().equals(answer1)) {
-                    Intent intent = new Intent(Intent.ACTION_SEND);
-                    intent.setType("message/rfc822");
-                    intent.putExtra(Intent.EXTRA_EMAIL, new String[]{/*"recipient@example.com"*/"elich_dj@hotmail.com"});
-                    intent.putExtra(Intent.EXTRA_SUBJECT, R.string.emailSubject);
-                    intent.putExtra(Intent.EXTRA_TEXT, "This is your password:");
-                    try {
-                        startActivity(Intent.createChooser(intent, "Send mail..."));
-                    } catch (android.content.ActivityNotFoundException ex) {
-                        Toast.makeText(this, getText(R.string.toastEmailCannotBeSent), Toast.LENGTH_SHORT).show();
-                    }
+                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                    alertDialog.setMessage("Your password is: " + player.getPassword())
+                            .show();
                 } else {
                     Toast.makeText(this, R.string.wrongAnswer, Toast.LENGTH_LONG).show();
                 }

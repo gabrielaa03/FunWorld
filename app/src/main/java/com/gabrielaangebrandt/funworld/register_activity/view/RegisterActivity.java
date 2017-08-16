@@ -72,8 +72,8 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 Matcher matcher = pattern.matcher(etEmail.getText().toString());
                 if (matcher.matches()) {
                     if (etPassword1.getText().toString().equals(etPassword2.getText().toString())) {
-                        Player player = new Player(etName.getText().toString(), etUsername.getText().toString(), etPassword1.getText().toString(), etEmail.getText().toString(), q, etAnswer.getText().toString(),
-                                0, 0, 0);
+                        Player player = new Player(etName.getText().toString(), etUsername.getText().toString(), etPassword1.getText().toString(), etEmail.getText().toString(), q,  etAnswer.getText().toString(),
+                                0, 10000000, 0);
                         Realm object = DatabaseConfig.getRealmInstance();
                         object.beginTransaction();
                         object.copyToRealmOrUpdate(player);
