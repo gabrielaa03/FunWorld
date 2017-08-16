@@ -4,6 +4,7 @@
     android:layout_height="70dp"
     xmlns:tools="http://schemas.android.com/tools">
 
+<!-- ELEMENT U RECYCLERU ZA POPIS DRŽAVA-->
     <TextView
         android:id="@+id/tv_name_of_country"
         android:layout_width="match_parent"

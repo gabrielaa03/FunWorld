@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--POINTS-->
     <TextView
         android:id="@+id/tv_counryName"
         android:layout_width="wrap_content"
@@ -46,6 +47,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"/>
 
+    <!--LEFT FLAG-->
 
     <ImageView
         android:id="@+id/iv_leftFlag"
@@ -58,6 +60,8 @@
         android:scaleType="centerCrop"
         android:layout_below="@+id/tv_counryName"
         tools:background="@drawable/al"/>
+
+    <!--RIGHT FLAG-->
 
     <ImageView
         android:id="@+id/iv_rightFlag"

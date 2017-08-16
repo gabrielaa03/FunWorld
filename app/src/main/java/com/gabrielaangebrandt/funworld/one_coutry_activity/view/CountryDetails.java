@@ -4,6 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -34,7 +35,6 @@ public class CountryDetails extends AppCompatActivity implements CountryContract
         ButterKnife.bind(this);
 
         presenter = new CountryPresenterImpl(this);
-
         nameOfCountry = getIntent().getExtras().getString("nameOfCountry");
         presenter.getName(nameOfCountry);
     }
