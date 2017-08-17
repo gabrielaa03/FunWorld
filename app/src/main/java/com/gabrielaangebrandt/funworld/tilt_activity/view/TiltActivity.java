@@ -44,9 +44,7 @@ public class TiltActivity extends AppCompatActivity implements SensorEventListen
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private long lastUpdate = 0;
-    private float last_x, last_y, last_z;
     boolean isAnswered = false;
-    private static final int SHAKE_THRESHOLD = 600;
     private static final int TIMEOUT = 200;
 
     @Override

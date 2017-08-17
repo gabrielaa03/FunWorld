@@ -17,25 +17,25 @@ import io.reactivex.schedulers.Schedulers;
  * Created by Plava tvornica on 28.7.2017..
  */
 
-public class CountryInteractorImpl extends BaseImpl implements CountryInteractor {
+public class CountryInteractorImpl extends BaseImpl implements CountryInteractor{
 
-    public void checkDisposable(String name, final Listener listener) {
-        addObserver(getCountryObservable(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<List<Example>>() {
-            @Override
-            public void onNext(List<Example> examples) {
-                listener.onSuccess(examples);
-            }
+    public void checkDisposable(String name, final Listener listener){
+            addObserver(getCountryObservable(name).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<List<Example>>() {
+                @Override
+                public void onNext(List<Example> examples) {
+                    listener.onSuccess(examples);
+                }
 
-            @Override
-            public void onError(Throwable e) {
-                listener.onError();
-            }
+                @Override
+                public void onError(Throwable e) {
+                    listener.onError();
+                }
 
-            @Override
-            public void onComplete() {
+                @Override
+                public void onComplete() {
 
-            }
-        }));
+                }
+            }));
 
 
     }

@@ -14,42 +14,48 @@
     <Button
         android:id="@+id/btn_memory"
         android:layout_below="@+id/iv_logo1"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="100dp"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:text="@string/memory"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:padding="16dp"
+        android:background="@drawable/game_button_shape"
+        android:textColor="#028482"
         android:textStyle="bold"/>
 
     <!--GUMB ZA TILT-->
     <Button
         android:id="@+id/btn_rightFlag"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="100dp"
         android:layout_below="@+id/btn_memory"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:text="@string/rightFlag"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="30sp"
         android:padding="16dp"
+        android:textColor="#028482"
+        android:background="@drawable/game_button_shape"
         android:textStyle="bold" />
 
     <!--GUMB ZA PIKADO-->
     <Button
         android:id="@+id/btn_picado"
-        android:layout_width="300dp"
+        android:layout_width="250dp"
         android:layout_height="100dp"
         android:layout_below="@+id/btn_rightFlag"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:text="@string/picado"
         android:padding="16dp"
+        android:textColor="#028482"
         android:textAlignment="center"
-        android:textSize="20sp"
+        android:textSize="30sp"
+        android:background="@drawable/game_button_shape"
         android:textStyle="bold"/>
 
 </RelativeLayout>

@@ -14,7 +14,6 @@ import io.reactivex.Observable;
  */
 
 public interface CountryInteractor extends Base {
-    void checkDisposable(String name, Listener listener);
-
-    Observable<List<Example>> getCountryObservable(String name);
+        void checkDisposable(String name, Listener listener);
+        Observable<List<Example>> getCountryObservable(String name);
 }

@@ -47,6 +47,20 @@ public class ForgottenPassword extends AppCompatActivity {
 
     @OnClick(R.id.btn_forgotten_pass)
     public void sendEmailRecoveryPassword() {
-
+        Realm realm = Realm.getDefaultInstance();
+        Player player = realm.where(Player.class).equalTo("username",  username.getText().toString()).findFirst();
+        if (player != null) {
+            if (player.getQuestion().equals(selectedItem)) {
+                if (player.getAnswer().equals(answer.getText().toString())) {
+                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+                    alertDialog.setMessage("Your password is: " + player.getPassword())
+                            .show();
+                } else {
+                    Toast.makeText(this, R.string.wrongAnswer, Toast.LENGTH_LONG).show();
+                }
+            } else {
+                Toast.makeText(this, R.string.wrongQuestion, Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
