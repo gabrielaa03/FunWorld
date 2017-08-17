@@ -46,7 +46,7 @@ public class MemoryPresenterImpl extends BaseImpl implements MemoryContract.Memo
         definedDrawables.clear();
         numbers.clear();
         //popuni niz s 51 brojem, pokreni shuffle i odaberi prvih 8 koji će predstavljati indekse u drawables
-        for(int i= 0; i<52; i++){
+        for (int i = 0; i < 52; i++) {
             numbers.add(i);
         }
         Collections.shuffle(numbers);
@@ -58,24 +58,26 @@ public class MemoryPresenterImpl extends BaseImpl implements MemoryContract.Memo
         view.getDefinedDrawables(definedDrawables);
         //na pozadinskoj niti izvodi se "stoperica" s osvježavanjem svake sekunde
         addObserver(Observable.interval(0, 1, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<Long>() {
-                    @Override
-                    public void onNext(Long aLong) {
-                        long currentTime = System.currentTimeMillis();
-                        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
-                        Date resultdate = new Date(currentTime-startTime);
-                        view.sendTimeData(simpleDateFormat.format(resultdate));
-                    }
+            @Override
+            public void onNext(Long aLong) {
+                long currentTime = System.currentTimeMillis();
+                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+                Date resultdate = new Date(currentTime - startTime);
+                view.sendTimeData(simpleDateFormat.format(resultdate));
+            }
 
-                    @Override
-                    public void onError(Throwable e) {}
+            @Override
+            public void onError(Throwable e) {
+            }
 
-                    @Override
-                    public void onComplete() {}
-                }));
+            @Override
+            public void onComplete() {
+            }
+        }));
     }
 
     @Override
     public void onStop() {
-       disposeCompositeD();
+        disposeCompositeD();
     }
 }

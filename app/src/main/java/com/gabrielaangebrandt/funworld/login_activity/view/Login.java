@@ -3,7 +3,6 @@ package com.gabrielaangebrandt.funworld.login_activity.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -21,7 +20,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
 
-public class Login extends AppCompatActivity{
+public class Login extends AppCompatActivity {
     @BindView(R.id.et_password)
     EditText password;
     @BindView(R.id.et_username)
@@ -54,10 +53,10 @@ public class Login extends AppCompatActivity{
         if (password.getText().toString().equals("") || username.getText().toString().equals("")) {
             Toast.makeText(this, R.string.wrongPasswordOrUsername, Toast.LENGTH_LONG).show();
         } else {
-            if ( user != null) {
-                SharedPrefs.setDefaults("username", username.getText().toString(), this);
-                SharedPrefs.setDefaults("password", password.getText().toString(), this);
-                SharedPrefs.setDefaults("isLoggedIn", "in", this);
+            if (user != null) {
+                SharedPrefs.setSharedPrefs("username", username.getText().toString(), this);
+                SharedPrefs.setSharedPrefs("password", password.getText().toString(), this);
+                SharedPrefs.setSharedPrefs("isLoggedIn", "in", this);
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             } else {
@@ -80,7 +79,18 @@ public class Login extends AppCompatActivity{
 
     @Override
     protected void onDestroy() {
-        if(realm != null) { realm.close(); }
+        if (realm != null) {
+            realm.close();
+        }
         super.onDestroy();
+    }
+
+    //onemogućiti back button
+    @Override
+    public void onBackPressed() {
+        Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+        homeIntent.addCategory(Intent.CATEGORY_HOME);
+        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
     }
 }

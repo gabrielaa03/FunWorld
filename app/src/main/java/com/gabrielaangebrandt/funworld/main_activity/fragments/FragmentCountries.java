@@ -30,17 +30,17 @@ import butterknife.Unbinder;
 public class
 
 
-
-FragmentCountries extends Fragment{
+FragmentCountries extends Fragment {
     Unbinder unbinder;
-   @BindView(R.id.rv_countries) RecyclerView listView;
+    @BindView(R.id.rv_countries)
+    RecyclerView listView;
 
     List<String> listOfCountries;
     RecyclerViewAdapterCountries adapter;
     RecyclerView.LayoutManager layoutManager;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState){
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_countries_layout, container, false);
         unbinder = ButterKnife.bind(this, v);
 
@@ -58,7 +58,8 @@ FragmentCountries extends Fragment{
         return v;
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }

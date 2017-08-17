@@ -43,15 +43,17 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
             public void onNext(Long aLong) {
                 long currentTime = System.currentTimeMillis();
                 SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
-                Date resultdate = new Date(currentTime-startTime);
+                Date resultdate = new Date(currentTime - startTime);
                 view.getTime(simpleDateFormat.format(resultdate));
             }
 
             @Override
-            public void onError(Throwable e) {}
+            public void onError(Throwable e) {
+            }
 
             @Override
-            public void onComplete() {}
+            public void onComplete() {
+            }
         }));
     }
 
@@ -73,22 +75,22 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
         view.sendCityName(cityNames.get(number));
     }
 
-    public String[] showRealCoordinatesOfCity(String cityName){
+    public String[] showRealCoordinatesOfCity(String cityName) {
         hashMapLatLngOfCities.get(cityName);
         return hashMapLatLngOfCities.get(cityName).split(",");
     }
 
-    public void checkIfCoordinatesAreCorrect(String coordinates, String city, long timeInLong){
+    public void checkIfCoordinatesAreCorrect(String coordinates, String city, long timeInLong) {
         hashMapLatLngOfCities.get(city);
         String[] trueValueParts = hashMapLatLngOfCities.get(city).split(",");
         String[] playersValueParts = coordinates.split(",");
-        double scoreDouble = Math.abs(Double.parseDouble(trueValueParts[0]) - Double.parseDouble(playersValueParts[0])+Math.abs(Double.parseDouble(trueValueParts[1]) - Double.parseDouble(playersValueParts[1])));
+        double scoreDouble = Math.abs(Double.parseDouble(trueValueParts[0]) - Double.parseDouble(playersValueParts[0]) + Math.abs(Double.parseDouble(trueValueParts[1]) - Double.parseDouble(playersValueParts[1])));
         score = score + scoreDouble;
-        counter ++;
-        if(counter == 10){
-            view.showScore(score+timeInLong);
+        counter++;
+        if (counter == 10) {
+            view.showScore(score + timeInLong);
             counter = 0;
-        }else{
+        } else {
             chooseCity();
         }
     }

@@ -19,6 +19,7 @@ import java.util.List;
 public class RecyclerViewAdapterCountries extends RecyclerView.Adapter<RecyclerViewAdapterCountries.ViewHolder> {
 
     private List<String> list;
+
     public RecyclerViewAdapterCountries(List<String> listOfCountries) {
         this.list = listOfCountries;
     }
@@ -37,11 +38,14 @@ public class RecyclerViewAdapterCountries extends RecyclerView.Adapter<RecyclerV
 
     @Override
     public int getItemCount() {
-        { return (list == null) ? 0 : list.size();}
+        {
+            return (list == null) ? 0 : list.size();
+        }
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-            TextView name ;
+        TextView name;
+
         public ViewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.tv_name_of_country);
@@ -50,7 +54,7 @@ public class RecyclerViewAdapterCountries extends RecyclerView.Adapter<RecyclerV
 
         @Override
         public void onClick(View view) {
-            Intent intent  = new Intent(view.getContext(), CountryDetails.class);
+            Intent intent = new Intent(view.getContext(), CountryDetails.class);
             intent.putExtra("nameOfCountry", list.get(getAdapterPosition()));
             view.getContext().startActivity(intent);
         }

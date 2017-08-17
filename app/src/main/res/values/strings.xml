@@ -5,47 +5,54 @@
     <string name="prompt_email">Email</string>
     <string name="prompt_username">Username</string>
     <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in</string>
-    <string name="action_register">Register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
     <string name="or">or</string>
     <string name="logIn">Log in</string>
     <string name="register">Register</string>
-    <string name="name">Name:</string>
+    <string name="forgottenPass">Forgot your password?</string>
+    <string name="wrongPasswordOrUsername">Wrong password or username.</string>
+
+   <!-- Strings related to registration-->
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="name">Name:<font color='red'>*</font></string>
     <string name="hint_name">e.g. Dave</string>
     <string name="egUsername">e.g. Dave1232</string>
-    <string name="password">Password:</string>
-    <string name="username">Username:</string>
-    <string name="repeatPassword">Repeat password:</string>
-    <string name="email">Email:</string>
+    <string name="password">Password:<font color='red'>*</font></string>
+    <string name="username">Username:<font color='red'>*</font></string>
+    <string name="repeatPassword">Repeat password:<font color='red'>*</font></string>
+    <string name="email">Email:<font color='red'>*</font></string>
     <string name="hint_email">e.g.  dave@gmail.com</string>
     <string name="error_passwordsDontMatch">Passwords do not match!</string>
-    <string name="chooseQuestion">Choose one question for password recover:</string>
-    <string name="example_answer">e.g. My mother\'s birthplace is Osijek.</string>
+    <string name="chooseQuestion">Choose one question for password recover:<font color='red'>*</font></string>
+    <string name="example_answer"><font color='red'>*</font>e.g. My mother\'s birthplace is Osijek.</string>
     <string-array name="questions">
         <item>- - - - - - - - - - - - - - - - - - - - - - - - - - - - -</item>
         <item>What is your mother\'s birthplace?</item>
         <item>What is the name of your first pet?</item>
         <item>What is the name of your primary school teacher?</item>
     </string-array>
+    <string name="hint_answer"><font color='red'>*</font></string>
+    <string name="elementsArentEntered">You didn\'t enter all data.</string>
+    <string name="successfullRegistration">Successfully registered. :)</string>
+    <string name="wrongQuestion">You have choosen wrong question.</string>
+    <string name="wrongAnswer">Wrong answer.</string>
+    <string name="emailIsNotValid">Email isn\'t valid.</string>
+    <string name="playerAlreadyExists">This username is already taken.</string>
+
+    <!--String related to mainActivity-->
     <string name="countries">About country</string>
     <string name="games">Games</string>
     <string name="picado">Picado</string>
-    <string name="millionaire">Right Answer</string>
+    <string name="rightFlag">Right Flag</string>
     <string name="memory">Memory</string>
-    <string name="elementsArentEntered">You didn\'t enter all data.</string>
-    <string name="forgottenPass">Forgot your password?</string>
+    <string name="welcome">Welcome,</string>/>
+
+    <!--Strings related to forgottenpass-->
     <string name="tvForgottenPass">If you have forgotten your password then choose question and answer it correctly.</string>
     <string name="bForgottenPassword">Show me my password</string>/>
-    <string name="toastEmailCannotBeSent">Email cannot be sent. Try again...</string>/>
-    <string name="emailSubject">Your password for FunWorld</string>
+
+    <!--Strings related to data of country-->
     <string name="nazivRegije">Region: </string>
     <string name="area_label">Area (m2): </string>
     <string name="capital_label">Capital: </string>
@@ -53,17 +60,6 @@
     <string name="language_label">Official language: </string>
     <string name="currency_label">Currency: </string>
     <string name="alphacode_label">Aplha code 3: </string>
-    <string name="yes">START GAME</string>
-    <string name="cancel">CANCEL</string>
-    <string name="wrongPasswordOrUsername">Wrong password or username.</string>
-    <string name="startgame">Do you want to play?</string>
-    <string name="successfullRegistration">Successfully registered. :)</string>
-    <string name="emailIsNotValid">Email isn\'t valid.</string>
-    <string name="wrongQuestion">You have choosen wrong question.</string>
-    <string name="wrongAnswer">Wrong answer.</string>
-    <string name="prompt_answer">Answer</string>
-    <string name="playerAlreadyExists">This username is already taken.</string>
-    <string name="welcome">Welcome,</string>/>
     <string-array name="countries1">
         <item>Albania</item>
         <item>Andorra</item>
@@ -116,5 +112,12 @@
         <item>United Kingdom</item>
         <item>Vatican</item>
     </string-array>
+
+    <!--Strings related to games-->
+    <string name="yes">START GAME</string>
+    <string name="cancel">CANCEL</string>
+    <string name="startgame">Do you want to play?</string>
+    <string name="prompt_answer">Answer</string>
+
 
 </resources>

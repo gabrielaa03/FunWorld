@@ -11,9 +11,9 @@ import java.util.Date;
  */
 
 public class Converter {
-    public static long getTimeInLong(String format){
+    public static long getTimeInLong(String format) {
         SimpleDateFormat sdf = new SimpleDateFormat("mm:ss");
-        Date dateObj= null;
+        Date dateObj = null;
         try {
             dateObj = sdf.parse(format);
         } catch (ParseException e) {
@@ -21,13 +21,10 @@ public class Converter {
         }
         long newScore = dateObj.getTime();
         return Math.abs(newScore);
-
     }
 
-    public static String getLongtoTime(long l){
+    public static String getLongtoTime(long l) {
         long ll = l * (-1);
         return DateFormat.format("mm:ss", new Date(ll)).toString();
     }
-
-
 }

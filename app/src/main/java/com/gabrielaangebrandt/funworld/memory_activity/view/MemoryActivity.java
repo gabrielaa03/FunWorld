@@ -33,11 +33,13 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
 
     @BindView(R.id.time)
     TextView time;
-    @BindView(R.id.recyclerViewMemory) RecyclerView recyclerView;
+    @BindView(R.id.recyclerViewMemory)
+    RecyclerView recyclerView;
     RecyclerView.LayoutManager layoutManager;
     MyRecyclerAdapter adapter;
     MemoryContract.MemoryPresenter presenter;
-    long score; String format, timeFormat;
+    long score;
+    String format, timeFormat;
 
 
     @Override
@@ -45,9 +47,8 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.memory_layout);
         ButterKnife.bind(this);
-
+        setTitle("Memory");
         presenter = new MemoryPresenterImpl(this);
-
         layoutManager = new GridLayoutManager(this, 3);
         recyclerView.setLayoutManager(layoutManager);
         adapter = new MyRecyclerAdapter(this);
@@ -60,6 +61,7 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
         presenter.onStart();
 
     }
+
     @Override
     protected void onStop() {
         super.onStop();
@@ -70,7 +72,7 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
     @Override
     public void getDefinedDrawables(List<String> definedDrawables) {
         List<MemoryObject> objects = new ArrayList<>();
-        for(String s : definedDrawables){
+        for (String s : definedDrawables) {
             objects.add(new MemoryObject(getResources().getIdentifier(s, "drawable", getPackageName()), false, false, s));
         }
         adapter.addDataToAdapter(objects);
@@ -78,36 +80,38 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
 
     //postavi vrijeme u textView
     @Override
-    public void sendTimeData(String format){
+    public void sendTimeData(String format) {
         this.format = format;
         time.setText(format);
     }
 
     //pošalji početno vrijeme
-    public long getStartTime(){return System.currentTimeMillis();}
+    public long getStartTime() {
+        return System.currentTimeMillis();
+    }
 
     //prikaz rezultata u alert Dialogu
-    public void showScore(){
+    public void showScore() {
         presenter.onStop();
         score = Converter.getTimeInLong(format);
         Realm realm = Realm.getDefaultInstance();
-        String username = SharedPrefs.getDefaults("username", this);
-        String password = SharedPrefs.getDefaults("password", this);
+        String username = SharedPrefs.getSharedPrefs("username", this);
+        String password = SharedPrefs.getSharedPrefs("password", this);
         realm.beginTransaction();
         Player user = realm.where(Player.class).equalTo("username", username).equalTo("password", password).findFirst();
-            if(user != null){
-                if(user.getHsMemory()< score){
-                    user.setHsMemory(score);
-                }
-                Converter.getLongtoTime(user.getHsMemory());
+        if (user != null) {
+            if (user.getHsMemory() < score) {
+                user.setHsMemory(score);
             }
+            Converter.getLongtoTime(user.getHsMemory());
+        }
 
         Player realmUser = realm.copyToRealmOrUpdate(user);
         realm.commitTransaction();
 
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setMessage("Your score is:  " + format + "\n" +
-                            "Your best score is : " + Converter.getLongtoTime(score))
+                "Your best score is : " + Converter.getLongtoTime(score))
                 .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();

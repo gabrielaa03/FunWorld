@@ -72,13 +72,13 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 Matcher matcher = pattern.matcher(etEmail.getText().toString());
                 if (matcher.matches()) {
                     if (etPassword1.getText().toString().equals(etPassword2.getText().toString())) {
-                        Player player = new Player(etName.getText().toString(), etUsername.getText().toString(), etPassword1.getText().toString(), etEmail.getText().toString(), q,  etAnswer.getText().toString(),
+                        Player player = new Player(etName.getText().toString(), etUsername.getText().toString(), etPassword1.getText().toString(), etEmail.getText().toString(), q, etAnswer.getText().toString(),
                                 0, 10000000, 0);
                         Realm object = DatabaseConfig.getRealmInstance();
                         object.beginTransaction();
                         object.copyToRealmOrUpdate(player);
                         object.commitTransaction();
-                        SharedPrefs.setDefaults("name", etName.getText().toString(), this);
+                        SharedPrefs.setSharedPrefs("name", etName.getText().toString(), this);
                         Toast.makeText(this, R.string.successfullRegistration, Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(this, Login.class);
                         startActivity(intent);

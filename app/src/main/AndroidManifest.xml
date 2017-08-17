@@ -41,6 +41,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".memory_activity.view.MemoryActivity"
+            android:screenOrientation="portrait"
             android:parentActivityName=".main_activity.view.MainActivity" />
         <activity
             android:name=".tilt_activity.view.TiltActivity"

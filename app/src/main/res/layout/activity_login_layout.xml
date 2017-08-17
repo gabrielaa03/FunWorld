@@ -42,15 +42,18 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_marginTop="16dp"
+        android:inputType="textPassword"
         android:layout_below="@+id/text_input_layout"
         android:hint="@string/prompt_password">
+
         <EditText
             android:id="@+id/et_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginRight="16dp"
-            android:textSize="20sp"/>
+            android:inputType="textPassword"
+            android:textSize="20sp" />
     </android.support.design.widget.TextInputLayout>
 
     <!--LOGIN BUTTON-->

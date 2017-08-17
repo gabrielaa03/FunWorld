@@ -18,11 +18,11 @@ import java.util.List;
  * Created by Gabriela on 22.7.2017..
  */
 
-public class CountryPresenterImpl implements CountryContract.CountryPresenter,Listener{
+public class CountryPresenterImpl implements CountryContract.CountryPresenter, Listener {
 
     private CountryContract.CountryView view;
     private CountryInteractor interactor;
-    private String nameOfCountry="";
+    private String nameOfCountry = "";
 
     public CountryPresenterImpl(CountryContract.CountryView view) {
         this.view = view;
@@ -34,7 +34,7 @@ public class CountryPresenterImpl implements CountryContract.CountryPresenter,Li
 
         String name = "";
         Integer population = null;
-        Double area  = null;
+        Double area = null;
         String region = "";
         String alphaCode3 = "";
         String alphaCode2 = "";
@@ -44,25 +44,25 @@ public class CountryPresenterImpl implements CountryContract.CountryPresenter,Li
         String language = "";
         String currency = "";
 
-            for(int i=0; i<list.size(); i++) {
-                name = list.get(i).getName();
-                population = list.get(i).getPopulation();
-                area = list.get(i).getArea();
-                region = list.get(i).getRegion();
-                alphaCode3 = list.get(i).getAlpha3Code();
-                alphaCode2 = list.get(i).getAlpha2Code();
-                capital = list.get(i).getCapital();
-                languageList = list.get(i).getLanguages();
-                currencyList = list.get(i).getCurrencies();
-            }
+        for (int i = 0; i < list.size(); i++) {
+            name = list.get(i).getName();
+            population = list.get(i).getPopulation();
+            area = list.get(i).getArea();
+            region = list.get(i).getRegion();
+            alphaCode3 = list.get(i).getAlpha3Code();
+            alphaCode2 = list.get(i).getAlpha2Code();
+            capital = list.get(i).getCapital();
+            languageList = list.get(i).getLanguages();
+            currencyList = list.get(i).getCurrencies();
+        }
 
-            for(int i=0; i< languageList.size();i++){
-                language = languageList.get(i).getName();
-            }
+        for (int i = 0; i < languageList.size(); i++) {
+            language = languageList.get(i).getName();
+        }
 
-            for(int i=0; i<currencyList.size();i++){
-                currency = currencyList.get(i).getName();
-            }
+        for (int i = 0; i < currencyList.size(); i++) {
+            currency = currencyList.get(i).getName();
+        }
 
 
         view.sendData(name, population, area, region, alphaCode3, alphaCode2, capital, language, currency);
@@ -71,7 +71,7 @@ public class CountryPresenterImpl implements CountryContract.CountryPresenter,Li
 
     @Override
     public void onError() {
-        Log.d("error","Cannot get response.");
+        Log.d("error", "Cannot get response.");
     }
 
     @Override

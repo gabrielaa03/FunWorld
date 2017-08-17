@@ -21,16 +21,6 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
     <Button
-        android:id="@+id/btn_millionaire"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:text="@string/millionaire"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_alignTop="@+id/btn_memory"
-        android:layout_alignParentRight="true" />
-    <Button
         android:id="@+id/btn_picado"
         android:layout_width="200dp"
         android:layout_height="100dp"
@@ -38,7 +28,17 @@
         android:textAlignment="center"
         android:textSize="20sp"
         android:textStyle="bold"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/btn_rightFlag" />
+    <Button
+        android:id="@+id/btn_rightFlag"
+        android:layout_width="200dp"
+        android:layout_height="100dp"
+        android:text="@string/rightFlag"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
         android:layout_centerHorizontal="true"
-        android:layout_alignTop="@+id/btn_millionaire" />
+        android:layout_alignTop="@+id/btn_memory" />
 
 </RelativeLayout>

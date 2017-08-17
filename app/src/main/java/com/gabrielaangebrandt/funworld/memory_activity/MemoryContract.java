@@ -8,15 +8,19 @@ import java.util.List;
  */
 
 public interface MemoryContract {
-    interface MemoryView{
+    interface MemoryView {
         void getDefinedDrawables(List<String> definedDrawables);
+
         long getStartTime();
+
         void sendTimeData(String format);
+
         void showScore();
     }
 
-    interface MemoryPresenter{
+    interface MemoryPresenter {
         void onStart();
+
         void onStop();
     }
 }

@@ -22,8 +22,9 @@ import butterknife.Unbinder;
  * Created by Gabriela on 16.5.2017..
  */
 
-public class FragmentGames extends Fragment{
+public class FragmentGames extends Fragment {
     Unbinder unbinder;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_games_layout, container, false);
@@ -32,25 +33,26 @@ public class FragmentGames extends Fragment{
     }
 
     @OnClick(R.id.btn_memory)
-        void openADMemory(){
-        Intent intent = new Intent (getContext(), MemoryActivity.class);
+    void openADMemory() {
+        Intent intent = new Intent(getContext(), MemoryActivity.class);
         startActivity(intent);
     }
 
     @OnClick(R.id.btn_picado)
-     void openADPicado(){
+    void openADPicado() {
         Intent intent = new Intent(getContext(), PicadoActivity.class);
         startActivity(intent);
         final AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(getContext());
     }
 
-    @OnClick(R.id.btn_millionaire)
-      void openADTilt(){
-        Intent intent = new Intent (getContext(), TiltActivity.class);
+    @OnClick(R.id.btn_rightFlag)
+    void openADTilt() {
+        Intent intent = new Intent(getContext(), TiltActivity.class);
         startActivity(intent);
     }
 
-    @Override public void onDestroyView() {
+    @Override
+    public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
     }

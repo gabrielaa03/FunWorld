@@ -26,13 +26,13 @@
 
     <!--GUMB ZA TILT-->
     <Button
-        android:id="@+id/btn_millionaire"
+        android:id="@+id/btn_rightFlag"
         android:layout_width="300dp"
         android:layout_height="100dp"
         android:layout_below="@+id/btn_memory"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
-        android:text="@string/millionaire"
+        android:text="@string/rightFlag"
         android:textAlignment="center"
         android:textSize="20sp"
         android:padding="16dp"
@@ -43,7 +43,7 @@
         android:id="@+id/btn_picado"
         android:layout_width="300dp"
         android:layout_height="100dp"
-        android:layout_below="@+id/btn_millionaire"
+        android:layout_below="@+id/btn_rightFlag"
         android:layout_marginTop="20dp"
         android:layout_centerHorizontal="true"
         android:text="@string/picado"

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
         tabLayout.setTabTextColors(ContextCompat.getColor(this, R.color.white), ContextCompat.getColor(this, R.color.colorAccent));
         tabLayout.setBackgroundColor(ContextCompat.getColor(this, R.color.colorPrimaryDark));
         Realm realm = Realm.getDefaultInstance();
-        Player player = realm.where(Player.class).equalTo("username", SharedPrefs.getDefaults("username", this)).findFirst();
+        Player player = realm.where(Player.class).equalTo("username", SharedPrefs.getSharedPrefs("username", this)).findFirst();
         if(player !=null){
             setTitle("Welcome, " + player.getName());
         }
@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSe
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.mybutton) {
-            SharedPrefs.setDefaults("isLoggedIn", "out", this);
+            SharedPrefs.setSharedPrefs("isLoggedIn", "out", this);
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
         }

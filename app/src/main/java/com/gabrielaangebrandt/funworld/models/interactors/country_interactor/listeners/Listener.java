@@ -9,6 +9,7 @@ import java.util.List;
  */
 
 public interface Listener {
-        void onSuccess(List<Example> list);
-        void onError();
+    void onSuccess(List<Example> list);
+
+    void onError();
 }

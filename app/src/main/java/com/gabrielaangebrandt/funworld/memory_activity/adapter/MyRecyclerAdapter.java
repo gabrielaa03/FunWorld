@@ -23,7 +23,7 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     private int counter;
     private MemoryContract.MemoryView listener;
 
-    public MyRecyclerAdapter(MemoryContract.MemoryView listener){
+    public MyRecyclerAdapter(MemoryContract.MemoryView listener) {
         this.listener = listener;
     }
 
@@ -81,14 +81,14 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
                     }
                 }
             }
-            for(MemoryObject object : objects){
-                if(object.isMatched())counter++;
+            for (MemoryObject object : objects) {
+                if (object.isMatched()) counter++;
             }
-            if(counter==18){
+            if (counter == 18) {
                 listener.showScore();
-                counter=0;
-            }else{
-                counter=0;
+                counter = 0;
+            } else {
+                counter = 0;
             }
         }
     }

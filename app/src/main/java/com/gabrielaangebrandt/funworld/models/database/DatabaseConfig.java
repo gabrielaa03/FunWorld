@@ -9,7 +9,7 @@ import io.realm.RealmConfiguration;
  * Created by Gabriela on 27.7.2017..
  */
 
-public class DatabaseConfig extends Application{
+public class DatabaseConfig extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
@@ -18,7 +18,7 @@ public class DatabaseConfig extends Application{
         Realm.setDefaultConfiguration(defaultConfig);
     }
 
-    public static Realm getRealmInstance(){
+    public static Realm getRealmInstance() {
         return Realm.getDefaultInstance();
     }
 }

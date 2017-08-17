@@ -42,9 +42,9 @@
     <ImageView
         android:id="@+id/iv_logo1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:src="@drawable/logo"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="8dp"
         android:padding="8dp"
         android:layout_below="@+id/text_input_layout1"
         />
@@ -97,11 +97,11 @@
         android:padding="8dp"
         android:textAlignment="center"
         android:layout_marginTop="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_below="@+id/btn_register"
-        android:layout_toEndOf="@+id/iv_logo1"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentRight="true"
+        android:layout_below="@+id/iv_logo1"
         android:clickable="true"
-        android:background="@drawable/text_color"/>
+        android:background="@drawable/text_color"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/btn_register"
+        android:layout_toStartOf="@+id/btn_register" />
 </RelativeLayout>

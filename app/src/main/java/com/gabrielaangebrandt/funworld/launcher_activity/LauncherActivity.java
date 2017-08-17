@@ -20,10 +20,10 @@ public class LauncherActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_launcher);
-        if (SharedPrefs.getDefaults("isLoggedIn", this).equals("in")) {
+        if (SharedPrefs.getSharedPrefs("isLoggedIn", this).equals("in")) {
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
-        } else if(SharedPrefs.getDefaults("isLoggedIn", this).equals("out")){
+        } else if (SharedPrefs.getSharedPrefs("isLoggedIn", this).equals("out")) {
             Intent intent = new Intent(this, Login.class);
             startActivity(intent);
         }

@@ -10,6 +10,7 @@ import com.gabrielaangebrandt.funworld.R;
 import com.gabrielaangebrandt.funworld.models.interactors.country_interactor.CountryInteractorImpl;
 import com.gabrielaangebrandt.funworld.models.interactors.country_interactor.CountryInteractor;
 import com.gabrielaangebrandt.funworld.tilt_activity.TiltContract;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -28,7 +29,7 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     private String right = "";
     private String left = "";
     private Random random = new Random();
-    private int counterFalse = 0 , counterTrue = 0;
+    private int counterFalse = 0, counterTrue = 0;
     private AudioManager audioManager;
     private SoundPool soundPool;
     int correctSound, incorrectSound;
@@ -108,7 +109,7 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     }
 
     public void playSound(int sound) {
-        switch (sound){
+        switch (sound) {
             case 0:
                 soundPool.play(incorrectSound, 1, 1, 1, 0, 1f);
                 break;
@@ -119,7 +120,7 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void addSound(Context ctx){
+    private void addSound(Context ctx) {
         soundPool = new SoundPool.Builder()
                 .setMaxStreams(100)
                 .build();
@@ -128,6 +129,7 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
         audioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
 
     }
+
     private void putIntoHashMap() {
         hashmap.put("al", "Albania");
         hashmap.put("am", "Armenia");

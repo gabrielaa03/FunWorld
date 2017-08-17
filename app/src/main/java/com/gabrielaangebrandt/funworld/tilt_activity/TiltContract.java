@@ -8,17 +8,20 @@ import android.view.animation.Animation;
  */
 
 public interface TiltContract {
-    interface TiltView{
+    interface TiltView {
 
         void sendNumbers(String left, String right, String top);
 
         void sendAnimation(String side, int counterFalse, int counterTrue);
     }
-    interface  TiltPresenter{
+
+    interface TiltPresenter {
         void onStart();
+
         void onStop();
 
-        void checkAnswer(Context context,String side, String nameFlag);
+        void checkAnswer(Context context, String side, String nameFlag);
+
         void playSound(int soundID);
     }
 }

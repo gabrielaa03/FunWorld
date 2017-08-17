@@ -21,10 +21,13 @@ import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import io.realm.Realm;
 
-public class ForgottenPassword extends AppCompatActivity{
-    @BindView(R.id.spinner) Spinner spinner;
-    @BindView(R.id.et_answer) EditText answer;
-    @BindView(R.id.et_username) EditText username;
+public class ForgottenPassword extends AppCompatActivity {
+    @BindView(R.id.spinner)
+    Spinner spinner;
+    @BindView(R.id.et_answer)
+    EditText answer;
+    @BindView(R.id.et_username)
+    EditText username;
     private String selectedItem;
 
     @Override
@@ -38,28 +41,12 @@ public class ForgottenPassword extends AppCompatActivity{
     }
 
     @OnItemSelected(R.id.spinner)
-    public void selectQuestion(AdapterView<?> parent, View view, int position, long id){
+    public void selectQuestion(AdapterView<?> parent, View view, int position, long id) {
         selectedItem = parent.getItemAtPosition(position).toString();
     }
 
     @OnClick(R.id.btn_forgotten_pass)
-        public void sendEmailRecoveryPassword(){
-        String username1 = username.getText().toString();
-        String answer1 = answer.getText().toString();
-        Realm realm = Realm.getDefaultInstance();
-        Player player = realm.where(Player.class).equalTo("username", username1).findFirst();
-        if(player != null) {
-            if (player.getQuestion().equals(selectedItem)) {
-                if (player.getAnswer().equals(answer1)) {
-                    final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
-                    alertDialog.setMessage("Your password is: " + player.getPassword())
-                            .show();
-                } else {
-                    Toast.makeText(this, R.string.wrongAnswer, Toast.LENGTH_LONG).show();
-                }
-            } else {
-                Toast.makeText(this, R.string.wrongQuestion, Toast.LENGTH_LONG).show();
-            }
-        }
+    public void sendEmailRecoveryPassword() {
+
     }
 }
