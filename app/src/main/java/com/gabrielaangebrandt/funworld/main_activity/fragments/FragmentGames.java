@@ -32,20 +32,20 @@ public class FragmentGames extends Fragment {
         return view;
     }
 
-    @OnClick(R.id.btn_memory)
+    @OnClick(R.id.rl_memory)
     void openADMemory() {
         Intent intent = new Intent(getContext(), MemoryActivity.class);
         startActivity(intent);
     }
 
-    @OnClick(R.id.btn_picado)
+    @OnClick(R.id.rl_picado)
     void openADPicado() {
         Intent intent = new Intent(getContext(), PicadoActivity.class);
         startActivity(intent);
         final AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(getContext());
     }
 
-    @OnClick(R.id.btn_rightFlag)
+    @OnClick(R.id.rl_rightFlag)
     void openADTilt() {
         Intent intent = new Intent(getContext(), TiltActivity.class);
         startActivity(intent);

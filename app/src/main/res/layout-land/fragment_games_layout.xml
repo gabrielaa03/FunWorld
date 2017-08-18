@@ -2,43 +2,78 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/logo"
         android:id="@+id/iv_logo1"/>
 
-    <Button
-        android:id="@+id/btn_memory"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="45dp"
-        android:text="@string/memory"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_below="@+id/iv_logo1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-    <Button
-        android:id="@+id/btn_picado"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:text="@string/picado"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/btn_rightFlag" />
-    <Button
-        android:id="@+id/btn_rightFlag"
-        android:layout_width="200dp"
-        android:layout_height="100dp"
-        android:text="@string/rightFlag"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:layout_centerHorizontal="true"
-        android:layout_alignTop="@+id/btn_memory" />
+        <!--GUMB ZA MEMORY-->
+    <RelativeLayout
+        android:id="@+id/rl_memory"
+        android:layout_width="wrap_content"
+        android:layout_toStartOf="@+id/rl_rightFlag"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_logo1">
+        <TextView
+            android:id="@+id/tv_memory"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginTop="50dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/memoryarraw"
+            android:gravity="center"
+            android:background="@color/colorAccent"
+            android:textSize="30sp"
+            android:padding="16dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
 
+    </RelativeLayout>
+    <!--GUMB ZA TILT-->
+    <RelativeLayout
+        android:id="@+id/rl_rightFlag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/iv_logo1">
+        <TextView
+            android:id="@+id/tv_fightFlag"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="50dp"
+            android:text="@string/rightflagarraw"
+            android:gravity="center"
+            android:background="@color/colorPrimary"
+            android:textSize="30sp"
+            android:padding="16dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+
+    </RelativeLayout>
+    <!--GUMB ZA PIKADO-->
+    <RelativeLayout
+        android:id="@+id/rl_picado"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/iv_logo1"
+        android:layout_toEndOf="@+id/rl_rightFlag">
+        <TextView
+            android:id="@+id/tv_picado1"
+            android:layout_width="185dp"
+            android:layout_height="100dp"
+            android:text="@string/picadoarraw"
+            android:gravity="center_vertical"
+            android:textAlignment="textEnd"
+            android:layout_marginTop="50dp"
+            android:background="@color/deepPink"
+            android:textSize="30sp"
+            android:padding="16dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"/>
+    </RelativeLayout>
 </RelativeLayout>

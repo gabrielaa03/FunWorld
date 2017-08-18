@@ -15,24 +15,23 @@
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
-    <string name="name">Name:<font color='red'>*</font></string>
+    <string name="name">Name:</string>
     <string name="hint_name">e.g. Dave</string>
-    <string name="egUsername">e.g. Dave1232</string>
-    <string name="password">Password:<font color='red'>*</font></string>
-    <string name="username">Username:<font color='red'>*</font></string>
-    <string name="repeatPassword">Repeat password:<font color='red'>*</font></string>
-    <string name="email">Email:<font color='red'>*</font></string>
+    <string name="hint_Username">e.g. Dave1232</string>
+    <string name="password">Password:</string>
+    <string name="username">Username:</string>
+    <string name="repeatPassword">Repeat password:</string>
+    <string name="email">Email:</string>
     <string name="hint_email">e.g.  dave@gmail.com</string>
     <string name="error_passwordsDontMatch">Passwords do not match!</string>
-    <string name="chooseQuestion">Choose one question for password recover:<font color='red'>*</font></string>
-    <string name="example_answer"><font color='red'>*</font>e.g. My mother\'s birthplace is Osijek.</string>
+    <string name="chooseQuestion">Choose one question for password recover:</string>
+    <string name="example_answer">e.g. My mother\'s birthplace is Osijek.</string>
     <string-array name="questions">
         <item>- - - - - - - - - - - - - - - - - - - - - - - - - - - - -</item>
         <item>What is your mother\'s birthplace?</item>
         <item>What is the name of your first pet?</item>
         <item>What is the name of your primary school teacher?</item>
     </string-array>
-    <string name="hint_answer"><font color='red'>*</font></string>
     <string name="elementsArentEntered">You didn\'t enter all data.</string>
     <string name="successfullRegistration">Successfully registered. :)</string>
     <string name="wrongQuestion">You have choosen wrong question.</string>
@@ -118,6 +117,9 @@
     <string name="cancel">CANCEL</string>
     <string name="startgame">Do you want to play?</string>
     <string name="prompt_answer">Answer</string>
-
+    <string name="arraw">\u21e8</string>
+    <string name="memoryarraw">Memory \u21e8</string>
+    <string name="rightflagarraw">Right Flag \u21e8</string>
+    <string name="picadoarraw">Picado \u21e8</string>
 
 </resources>

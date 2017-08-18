@@ -49,6 +49,10 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
 
     @Override
     public void onStart() {
+        if(counterFalse + counterTrue >= 20){
+            counterFalse = 0;
+            counterTrue = 0;
+        }
         int number1;
         int number2;
         putIntoHashMap();

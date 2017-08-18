@@ -125,7 +125,6 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
             }
         }, 500);
         this.timeFormat = timeFormat;
-
     }
 
     @Override
@@ -161,7 +160,17 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
                 .setNegativeButton("Replay", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         presenter.onStart();
+                        if (marker != null || marker2 != null) {
+                            marker.remove();
+                            marker2.remove();
+                        }
                     }
                 }).show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

@@ -125,6 +125,8 @@ public class TiltActivity extends AppCompatActivity implements SensorEventListen
                     })
                     .setNegativeButton("Replay", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
+                            tv_false.setText("0");
+                            tv_true.setText("0");
                             presenter.onStart();
                         }
                     }).show();
@@ -173,5 +175,11 @@ public class TiltActivity extends AppCompatActivity implements SensorEventListen
     protected void onDestroy() {
         super.onDestroy();
         sensorManager.unregisterListener(this);
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
     }
 }

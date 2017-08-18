@@ -2,6 +2,7 @@ package com.gabrielaangebrandt.funworld.register_activity.view;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -47,12 +48,12 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
         super.onCreate(savedInstanceState);
         setContentView(R.layout.register_layout);
         ButterKnife.bind(this);
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.questions, android.R.layout.simple_list_item_1);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         question.setAdapter(adapter);
         question.setOnItemSelectedListener(this);
     }
+
 
     @OnClick(R.id.btn_register_player)
     void checkLoginData() {

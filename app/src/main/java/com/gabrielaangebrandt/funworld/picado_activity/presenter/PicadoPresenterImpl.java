@@ -117,6 +117,7 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
         hashMapLatLngOfCities.put("Berlin", "52.52437,13.41053");
         hashMapLatLngOfCities.put("Budapest", "47.49801,19.03991");
         hashMapLatLngOfCities.put("Reykyavik", "64.13548,-21.89541");
+        hashMapLatLngOfCities.put("Belgrade", "44.787197,20.457273");
         hashMapLatLngOfCities.put("Rome", "41.89193,12.51133");
         hashMapLatLngOfCities.put("Pristina", "42.67272,21.16688");
         hashMapLatLngOfCities.put("Astana", "51.1801,71.44598");

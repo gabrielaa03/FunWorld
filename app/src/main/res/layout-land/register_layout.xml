@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="5dp"
-        android:hint="@string/egUsername"
+        android:hint="@string/hint_Username"
         android:layout_toRightOf="@+id/tv_username"
         android:layout_alignParentRight="true"/>
 
