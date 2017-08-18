@@ -6,7 +6,6 @@ package com.gabrielaangebrandt.funworld.picado_activity;
 
 public interface PicadoContract {
     interface PicadoView {
-        long sendStartTime();
 
         void getTime(String format);
 

@@ -11,8 +11,6 @@ public interface MemoryContract {
     interface MemoryView {
         void getDefinedDrawables(List<String> definedDrawables);
 
-        long getStartTime();
-
         void sendTimeData(String format);
 
         void showScore();
@@ -22,5 +20,7 @@ public interface MemoryContract {
         void onStart();
 
         void onStop();
+
+        void setTimer();
     }
 }

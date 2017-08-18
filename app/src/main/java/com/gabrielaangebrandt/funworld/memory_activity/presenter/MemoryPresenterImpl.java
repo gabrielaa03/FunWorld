@@ -25,15 +25,14 @@ public class MemoryPresenterImpl extends BaseImpl implements MemoryContract.Memo
     private List<Integer> numbers = new ArrayList<>();
     private List<String> definedDrawables = new ArrayList<>();
     private List<String> drawables;
-
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+    int timer = 0;
     public MemoryPresenterImpl(MemoryContract.MemoryView view) {
         this.view = view;
     }
 
     @Override
     public void onStart() {
-        //uzimam početno vrijeme
-        final long startTime = view.getStartTime();
         //definicija liste s alphacodovima
         drawables = Arrays.asList(
                 "al", "am", "ad", "at", "az", "ba", "bg", "be", "by", "ch", "cy",
@@ -60,10 +59,8 @@ public class MemoryPresenterImpl extends BaseImpl implements MemoryContract.Memo
         addObserver(Observable.interval(0, 1, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<Long>() {
             @Override
             public void onNext(Long aLong) {
-                long currentTime = System.currentTimeMillis();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
-                Date resultdate = new Date(currentTime - startTime);
-                view.sendTimeData(simpleDateFormat.format(resultdate));
+                timer += 1000;
+                view.sendTimeData(simpleDateFormat.format(timer));
             }
 
             @Override
@@ -79,5 +76,10 @@ public class MemoryPresenterImpl extends BaseImpl implements MemoryContract.Memo
     @Override
     public void onStop() {
         disposeCompositeD();
+    }
+
+    @Override
+    public void setTimer() {
+        timer = 0;
     }
 }

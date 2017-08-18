@@ -1,5 +1,7 @@
 package com.gabrielaangebrandt.funworld.picado_activity.presenter;
 
+import android.os.Handler;
+
 import com.gabrielaangebrandt.funworld.base.BaseImpl;
 import com.gabrielaangebrandt.funworld.picado_activity.PicadoContract;
 
@@ -28,6 +30,9 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
     private Map<String, String> hashMapLatLngOfCities = new HashMap<>();
     private double score = 0;
     private int counter = 0;
+    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
+    private final Handler handler = new Handler();
+    private int timer = 0;
 
     public PicadoPresenterImpl(PicadoContract.PicadoView view) {
         this.view = view;
@@ -35,16 +40,13 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
 
     @Override
     public void onStart() {
-        final long startTime = view.sendStartTime();
-        chooseCity();
+        chooseCity(rand.nextInt(50));
         fillUpHashMap();
         addObserver(Observable.interval(0, 1, TimeUnit.SECONDS).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()).subscribeWith(new DisposableObserver<Long>() {
             @Override
             public void onNext(Long aLong) {
-                long currentTime = System.currentTimeMillis();
-                SimpleDateFormat simpleDateFormat = new SimpleDateFormat("mm:ss");
-                Date resultdate = new Date(currentTime - startTime);
-                view.getTime(simpleDateFormat.format(resultdate));
+                timer += 1000;
+                view.getTime(simpleDateFormat.format(timer));
             }
 
             @Override
@@ -57,13 +59,12 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
         }));
     }
 
-
     @Override
     public void onStop() {
         disposeCompositeD();
     }
 
-    private void chooseCity() {
+    public void chooseCity(int number) {
         cityNames = Arrays.asList(
                 "Ankara", "Tirana", "Andorra la Vella", "Yerevan", "Baku", "Vienna", "Belgrade", "Zagreb", "Rome", "Sarajevo", "Moscow",
                 "Minsk", "Sofia", "Brussels", "Copenhagen", "Nicosia", "Prague", "Paris", "London",
@@ -71,7 +72,6 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
                 "Podgorica", "Reykyavik", "Astana", "Riga", "Vaduz", "Vilnius", "Valletta", "Skopje",
                 "Chişinău", "Luxembourg", "Monaco", "Kiev", "Bern", "Ljubljana", "Amsterdam", "Oslo",
                 "Lisabon", "Madrid", "Stockholm", "Bratislava", "Warsaw", "City of San Marino", "Dublin");
-        int number = rand.nextInt(50);
         view.sendCityName(cityNames.get(number));
     }
 
@@ -88,10 +88,17 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
         score = score + scoreDouble;
         counter++;
         if (counter == 10) {
+            timer = 0;
             view.showScore(score + timeInLong);
             counter = 0;
         } else {
-            chooseCity();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    chooseCity(rand.nextInt(50));
+                }
+            }, 500);
+            presenter.C
         }
     }
 

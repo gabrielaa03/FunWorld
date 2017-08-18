@@ -85,11 +85,6 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
         time.setText(format);
     }
 
-    //pošalji početno vrijeme
-    public long getStartTime() {
-        return System.currentTimeMillis();
-    }
-
     //prikaz rezultata u alert Dialogu
     public void showScore() {
         presenter.onStop();
@@ -106,7 +101,7 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
             Converter.getLongtoTime(user.getHsMemory());
         }
 
-        Player realmUser = realm.copyToRealmOrUpdate(user);
+        realm.copyToRealmOrUpdate(user);
         realm.commitTransaction();
 
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
@@ -120,6 +115,7 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
                 .setNegativeButton("Replay", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         presenter.onStart();
+                        presenter.setTimer();
                     }
                 }).show();
     }

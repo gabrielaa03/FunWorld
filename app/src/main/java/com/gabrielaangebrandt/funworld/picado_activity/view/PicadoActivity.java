@@ -3,6 +3,7 @@ package com.gabrielaangebrandt.funworld.picado_activity.view;
 import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +48,7 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
     PicadoContract.PicadoPresenter presenter;
     private GoogleMap.OnMapClickListener mCustomOnMapClickListener;
     private String timeFormat;
+    private final Handler handler = new Handler();
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,6 +76,7 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
     protected void onStart() {
         super.onStart();
         presenter.onStart();
+
     }
 
     @Override
@@ -105,23 +108,11 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
     }
 
     @Override
-    public long sendStartTime() {
-        return System.currentTimeMillis();
-    }
-
-    @Override
     public void getTime(final String timeFormat) {
-        if (marker != null || marker2 != null) {
-            marker.remove();
-            marker2.remove();
-        }
-
-        final android.os.Handler handler1 = new android.os.Handler();
-        handler1.postDelayed(new Runnable() {
+        handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 time.setText(timeFormat);
-
             }
         }, 500);
         this.timeFormat = timeFormat;
@@ -160,10 +151,12 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
                 .setNegativeButton("Replay", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         presenter.onStart();
-                        if (marker != null || marker2 != null) {
-                            marker.remove();
-                            marker2.remove();
-                        }
+                        Log.d("error", marker +" , "+ marker2);
+                         if(marker != null || marker2 != null){
+                             marker.remove();
+                             marker2.remove();
+                         }
+
                     }
                 }).show();
     }
