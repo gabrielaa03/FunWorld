@@ -16,14 +16,13 @@ import com.gabrielaangebrandt.funworld.memory_activity.MemoryContract;
 import com.gabrielaangebrandt.funworld.memory_activity.adapter.MyRecyclerAdapter;
 import com.gabrielaangebrandt.funworld.memory_activity.presenter.MemoryPresenterImpl;
 import com.gabrielaangebrandt.funworld.models.data_model.MemoryObject;
-import com.gabrielaangebrandt.funworld.models.data_model.Player;
+import com.gabrielaangebrandt.funworld.models.database.DatabaseManager;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import io.realm.Realm;
 
 /**
  * Created by Gabriela on 23.7.2017..
@@ -35,11 +34,12 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
     TextView time;
     @BindView(R.id.recyclerViewMemory)
     RecyclerView recyclerView;
+
     RecyclerView.LayoutManager layoutManager;
     MyRecyclerAdapter adapter;
     MemoryContract.MemoryPresenter presenter;
     long score;
-    String format, timeFormat;
+    String format;
 
 
     @Override
@@ -68,7 +68,7 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
         presenter.onStop();
     }
 
-    //povuci sve zastave
+    //get all flags
     @Override
     public void getDefinedDrawables(List<String> definedDrawables) {
         List<MemoryObject> objects = new ArrayList<>();
@@ -78,35 +78,23 @@ public class MemoryActivity extends AppCompatActivity implements MemoryContract.
         adapter.addDataToAdapter(objects);
     }
 
-    //postavi vrijeme u textView
+    //set time in textView
     @Override
     public void sendTimeData(String format) {
         this.format = format;
         time.setText(format);
     }
 
-    //prikaz rezultata u alert Dialogu
+    //show results in alert dialog
     public void showScore() {
         presenter.onStop();
         score = Converter.getTimeInLong(format);
-        Realm realm = Realm.getDefaultInstance();
         String username = SharedPrefs.getSharedPrefs("username", this);
-        String password = SharedPrefs.getSharedPrefs("password", this);
-        realm.beginTransaction();
-        Player user = realm.where(Player.class).equalTo("username", username).equalTo("password", password).findFirst();
-        if (user != null) {
-            if (user.getHsMemory() < score) {
-                user.setHsMemory(score);
-            }
-            Converter.getLongtoTime(user.getHsMemory());
-        }
-
-        realm.copyToRealmOrUpdate(user);
-        realm.commitTransaction();
+        long bestScore = DatabaseManager.setMemoryHighscore("username", username, score);
 
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setMessage("Your score is:  " + format + "\n" +
-                "Your best score is : " + Converter.getLongtoTime(score))
+                "Your best score is : " + Converter.getLongtoTime(bestScore))
                 .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();

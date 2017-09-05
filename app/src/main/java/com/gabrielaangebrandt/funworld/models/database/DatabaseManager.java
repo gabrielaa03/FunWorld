@@ -1,9 +1,6 @@
 package com.gabrielaangebrandt.funworld.models.database;
 
-import android.support.v7.app.AlertDialog;
-import android.widget.Toast;
-
-import com.gabrielaangebrandt.funworld.R;
+import com.gabrielaangebrandt.funworld.base.Converter;
 import com.gabrielaangebrandt.funworld.models.data_model.Player;
 
 import io.realm.Realm;
@@ -13,9 +10,22 @@ import io.realm.Realm;
  */
 
 public class DatabaseManager {
-    public static Player getPlayer(String databaseElement, String value){
+    public static long setMemoryHighscore(String databaseElement, String value, long score){
         Realm realm = Realm.getDefaultInstance();
-        Player player = realm.where(Player.class).equalTo(databaseElement, value).findFirst();
-        return player;
+        realm.beginTransaction();
+        Player user = realm.where(Player.class).equalTo(databaseElement, value).findFirst();
+        if (user != null) {
+            if (user.getHsMemory() > score) {
+                user.setHsMemory(score);
+            }
+            Converter.getLongtoTime(user.getHsMemory());
+        }
+        realm.copyToRealmOrUpdate(user);
+        realm.commitTransaction();
+        return user.getHsMemory();
     }
+
+
+
+
 }

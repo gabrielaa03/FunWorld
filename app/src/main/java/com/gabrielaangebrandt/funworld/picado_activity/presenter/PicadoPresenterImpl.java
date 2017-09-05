@@ -7,7 +7,6 @@ import com.gabrielaangebrandt.funworld.picado_activity.PicadoContract;
 
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,7 +97,7 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
                     chooseCity(rand.nextInt(50));
                 }
             }, 500);
-            presenter.C
+//            presenter.start();
         }
     }
 

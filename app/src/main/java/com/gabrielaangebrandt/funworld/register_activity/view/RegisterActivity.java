@@ -2,7 +2,6 @@ package com.gabrielaangebrandt.funworld.register_activity.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
@@ -12,6 +11,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.gabrielaangebrandt.funworld.R;
+import com.gabrielaangebrandt.funworld.base.Converter;
 import com.gabrielaangebrandt.funworld.base.SharedPrefs;
 import com.gabrielaangebrandt.funworld.login_activity.view.Login;
 import com.gabrielaangebrandt.funworld.models.data_model.Player;
@@ -74,7 +74,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 if (matcher.matches()) {
                     if (etPassword1.getText().toString().equals(etPassword2.getText().toString())) {
                         Player player = new Player(etName.getText().toString(), etUsername.getText().toString(), etPassword1.getText().toString(), etEmail.getText().toString(), q, etAnswer.getText().toString(),
-                                0, 10000000, 0);
+                                Converter.getTimeInLong("59:59"), 10000000, 0);
                         Realm object = DatabaseConfig.getRealmInstance();
                         object.beginTransaction();
                         object.copyToRealmOrUpdate(player);
