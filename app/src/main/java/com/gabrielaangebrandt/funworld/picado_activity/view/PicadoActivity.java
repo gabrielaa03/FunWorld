@@ -14,6 +14,7 @@ import com.gabrielaangebrandt.funworld.R;
 import com.gabrielaangebrandt.funworld.base.Converter;
 import com.gabrielaangebrandt.funworld.base.SharedPrefs;
 import com.gabrielaangebrandt.funworld.models.data_model.Player;
+import com.gabrielaangebrandt.funworld.models.database.DatabaseManager;
 import com.gabrielaangebrandt.funworld.picado_activity.PicadoContract;
 import com.gabrielaangebrandt.funworld.picado_activity.presenter.PicadoPresenterImpl;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -76,7 +77,6 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
     protected void onStart() {
         super.onStart();
         presenter.onStart();
-
     }
 
     @Override
@@ -109,6 +109,10 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
 
     @Override
     public void getTime(final String timeFormat) {
+        if(marker != null || marker2 != null){
+            marker.remove();
+            marker2.remove();
+        }
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -127,22 +131,10 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
     @Override
     public void showScore(double score) {
         presenter.onStop();
-        Realm realm = Realm.getDefaultInstance();
-        String username = SharedPrefs.getSharedPrefs("username", this);
-        String password = SharedPrefs.getSharedPrefs("password", this);
-        realm.beginTransaction();
-        Player user = realm.where(Player.class).equalTo("username", username).equalTo("password", password).findFirst();
-        if (user != null) {
-            if (user.getHsPicado() > (int) score) {
-                user.setHsPicado((int) score);
-            }
-        }
-        realm.copyToRealmOrUpdate(user);
-        realm.commitTransaction();
-
+        int bestScore = DatabaseManager.setPicadoHighscore("username", SharedPrefs.getSharedPrefs("username", this),(int)score);
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
         alertDialog.setMessage("Your score is:  " + (int) score + "\n" +
-                "Your best score is : " + user.getHsPicado())
+                "Your best score is : " + bestScore)
                 .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();

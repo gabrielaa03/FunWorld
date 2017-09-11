@@ -121,5 +121,9 @@
     <string name="memoryarraw">Memory \u21e8</string>
     <string name="rightflagarraw">Right Flag \u21e8</string>
     <string name="picadoarraw">Picado \u21e8</string>
+    <string name="picadoInstructions">Tap the place on map where the given capital is located.</string>
+    <string name="gameInstructions">Instructions</string>
+    <string name="memoryInstructions">Pair all flags in shortest time possible.</string>
+    <string name="tiltInstructins">Put the device in horizontal position and then tilt device left or right to choose  flag.</string>
 
 </resources>

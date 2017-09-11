@@ -1,8 +1,10 @@
 package com.gabrielaangebrandt.funworld.main_activity.fragments;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
@@ -34,21 +36,87 @@ public class FragmentGames extends Fragment {
 
     @OnClick(R.id.rl_memory)
     void openADMemory() {
-        Intent intent = new Intent(getContext(), MemoryActivity.class);
-        startActivity(intent);
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext()).setTitle(R.string.gameInstructions).setMessage(R.string.picadoInstructions);
+        final AlertDialog alert = dialog.create();
+        alert.show();
+
+        final Handler handler  = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (alert.isShowing()) {
+                    alert.dismiss();
+                    Intent intent = new Intent(getContext(), MemoryActivity.class);
+                    startActivity(intent);
+                }
+            }
+        };
+
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                handler.removeCallbacks(runnable);
+            }
+        });
+
+        handler.postDelayed(runnable, 3000);
     }
 
     @OnClick(R.id.rl_picado)
     void openADPicado() {
-        Intent intent = new Intent(getContext(), PicadoActivity.class);
-        startActivity(intent);
-        final AlertDialog.Builder alertDialog2 = new AlertDialog.Builder(getContext());
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext()).setTitle(R.string.gameInstructions).setMessage(R.string.picadoInstructions);
+        final AlertDialog alert = dialog.create();
+        alert.show();
+
+        final Handler handler  = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (alert.isShowing()) {
+                    alert.dismiss();
+                    Intent intent = new Intent(getContext(), PicadoActivity.class);
+                    startActivity(intent);
+                }
+            }
+        };
+
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                handler.removeCallbacks(runnable);
+            }
+        });
+
+        handler.postDelayed(runnable, 3000);
     }
 
     @OnClick(R.id.rl_rightFlag)
     void openADTilt() {
-        Intent intent = new Intent(getContext(), TiltActivity.class);
-        startActivity(intent);
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext()).setTitle(R.string.gameInstructions).setMessage(R.string.tiltInstructins);
+        final AlertDialog alert = dialog.create();
+        alert.show();
+
+        final Handler handler  = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                if (alert.isShowing()) {
+                    alert.dismiss();
+                    Intent intent = new Intent(getContext(), TiltActivity.class);
+                    startActivity(intent);
+                }
+            }
+        };
+
+        alert.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialog) {
+                handler.removeCallbacks(runnable);
+            }
+        });
+
+        handler.postDelayed(runnable, 3000);
+
     }
 
     @Override

@@ -30,9 +30,7 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     private String left = "";
     private Random random = new Random();
     private int counterFalse = 0, counterTrue = 0;
-    private AudioManager audioManager;
-    private SoundPool soundPool;
-    int correctSound, incorrectSound;
+    boolean soundLoaded;
 
     List<String> drawables = Arrays.asList(
             "al", "am", "ad", "at", "az", "ba", "bg", "be", "by", "ch", "cy",
@@ -49,7 +47,7 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
 
     @Override
     public void onStart() {
-        if(counterFalse + counterTrue >= 20){
+        if (counterFalse + counterTrue >= 20) {
             counterFalse = 0;
             counterTrue = 0;
         }
@@ -77,28 +75,33 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     }
 
     @Override
-    public void checkAnswer(Context ctx, String side, String nameFlag) {
+    public void checkAnswer(String side, String nameFlag) {
         String key = getKey(nameFlag);
-        addSound(ctx);
         switch (side) {
             case "leftFlag":
                 assert key != null;
                 if (key.equals(left)) {
-                    counterTrue++;
+                    view.playSound(2);
                 } else {
+                    view.playSound(1);
                     counterFalse++;
                 }
-                view.sendAnimation("left", counterFalse, counterTrue);
+
+                view.sendAction(counterFalse, counterTrue);
+
                 break;
 
             case "rightFlag":
                 assert key != null;
                 if (key.equals(right)) {
+                    view.playSound(2);
                     counterTrue++;
                 } else {
+                    view.playSound(1);
                     counterFalse++;
                 }
-                view.sendAnimation("right", counterFalse, counterTrue);
+
+                view.sendAction(counterFalse, counterTrue);
                 break;
         }
     }
@@ -112,27 +115,6 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
         return null;
     }
 
-    public void playSound(int sound) {
-        switch (sound) {
-            case 0:
-                soundPool.play(incorrectSound, 1, 1, 1, 0, 1f);
-                break;
-            case 1:
-                soundPool.play(correctSound, 1, 1, 1, 0, 1f);
-                break;
-        }
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void addSound(Context ctx) {
-        soundPool = new SoundPool.Builder()
-                .setMaxStreams(100)
-                .build();
-        correctSound = soundPool.load(ctx, R.raw.dustyroom_multimedia_correct_complete_bonus, 1);
-        incorrectSound = soundPool.load(ctx, R.raw.dustyroom_multimedia_incorrect_negative_tone, 1);
-        audioManager = (AudioManager) ctx.getSystemService(Context.AUDIO_SERVICE);
-
-    }
 
     private void putIntoHashMap() {
         hashmap.put("al", "Albania");

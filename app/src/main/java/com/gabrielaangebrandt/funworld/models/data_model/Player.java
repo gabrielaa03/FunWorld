@@ -1,5 +1,7 @@
 package com.gabrielaangebrandt.funworld.models.data_model;
 
+import java.util.Date;
+
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
@@ -15,11 +17,11 @@ public class Player extends RealmObject {
     private String question;
     private String email;
     private String answer;
-    private long hsMemory;
+    private String hsMemory;
     private int hsPicado;
     private int hsTilt;
 
-    public Player(String name, String username, String password, String email, String question, String answer, long hsMemory, int hsPicado, int hsTilt) {
+    public Player(String name, String username, String password, String email, String question, String answer, String hsMemory, int hsPicado, int hsTilt) {
         this.username = username;
         this.name = name;
         this.password = password;
@@ -81,11 +83,11 @@ public class Player extends RealmObject {
         this.answer = answer;
     }
 
-    public long getHsMemory() {
+    public String getHsMemory() {
         return hsMemory;
     }
 
-    public void setHsMemory(long hsMemory) {
+    public void setHsMemory(String hsMemory) {
         this.hsMemory = hsMemory;}
 
     public int getHsPicado() {

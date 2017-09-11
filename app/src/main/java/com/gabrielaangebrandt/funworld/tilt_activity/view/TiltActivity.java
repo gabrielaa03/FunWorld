@@ -5,7 +5,11 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.media.AudioManager;
+import android.media.SoundPool;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,8 +19,11 @@ import android.widget.TextView;
 import com.gabrielaangebrandt.funworld.R;
 import com.gabrielaangebrandt.funworld.base.SharedPrefs;
 import com.gabrielaangebrandt.funworld.models.data_model.Player;
+import com.gabrielaangebrandt.funworld.models.database.DatabaseManager;
 import com.gabrielaangebrandt.funworld.tilt_activity.TiltContract;
 import com.gabrielaangebrandt.funworld.tilt_activity.presenter.TiltPresenterImpl;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -40,12 +47,15 @@ public class TiltActivity extends AppCompatActivity implements SensorEventListen
     @BindView(R.id.tv_counter_true)
     TextView tv_true;
     private String leftF = "", rightF = "";
-    String nameFlag = "";
+    private String nameFlag = "";
     private SensorManager sensorManager;
     private Sensor accelerometer;
     private long lastUpdate = 0;
     boolean isAnswered = false;
     private static final int TIMEOUT = 200;
+    private SoundPool soundPool;
+    boolean soundLoaded = false;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +63,7 @@ public class TiltActivity extends AppCompatActivity implements SensorEventListen
         setContentView(R.layout.tilt_layout);
         ButterKnife.bind(this);
         presenter = new TiltPresenterImpl(this);
+        this.loadSounds();
         setTitle("Right Flag");
         tv_false.setText("0");
         tv_true.setText("0");
@@ -64,6 +75,7 @@ public class TiltActivity extends AppCompatActivity implements SensorEventListen
     protected void onStart() {
         super.onStart();
         presenter.onStart();
+
     }
 
     @Override
@@ -83,41 +95,16 @@ public class TiltActivity extends AppCompatActivity implements SensorEventListen
     }
 
     @Override
-    public void sendAnimation(String side, final int counterFalse, final int counterTrue) {
-        switch (side) {
-            case "left":
-                leftFlag.bringToFront();
-                presenter.playSound(1);
-                tv_false.setText(String.valueOf(counterFalse));
-                tv_true.setText(String.valueOf(counterTrue));
-
-                break;
-            case "right":
-                rightFlag.bringToFront();
-                presenter.playSound(0);
-                tv_false.setText(String.valueOf(counterFalse));
-                tv_true.setText(String.valueOf(counterTrue));
-
-                break;
-
-        }
+    public void sendAction(final int counterFalse, final int counterTrue) {
+        tv_false.setText(String.valueOf(counterFalse));
+        tv_true.setText(String.valueOf(counterTrue));
         if (counterFalse + counterTrue == 20) {
-            Realm realm = Realm.getDefaultInstance();
-            String username = SharedPrefs.getSharedPrefs("username", this);
-            String password = SharedPrefs.getSharedPrefs("password", this);
-            realm.beginTransaction();
-            Player user = realm.where(Player.class).equalTo("username", username).equalTo("password", password).findFirst();
-            if (user != null) {
-                if (user.getHsTilt() < counterTrue) {
-                    user.setHsTilt(counterTrue);
-                }
-            }
-            realm.copyToRealmOrUpdate(user);
-            realm.commitTransaction();
+
+            int bestScore = DatabaseManager.setTiltHighscore("username", SharedPrefs.getSharedPrefs("username", this), counterTrue);
 
             final AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
             alertDialog.setMessage("Your score is:  " + counterTrue + "\n" +
-                    "Your best score is : " + user.getHsTilt())
+                    "Your best score is : " + bestScore)
                     .setPositiveButton(R.string.cancel, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             finish();
@@ -139,12 +126,12 @@ public class TiltActivity extends AppCompatActivity implements SensorEventListen
         if (System.currentTimeMillis() - lastUpdate >= TIMEOUT) {
             lastUpdate = System.currentTimeMillis();
             if (!isAnswered && y < -3) {
-                presenter.checkAnswer(this, "leftFlag", nameFlag);
+                presenter.checkAnswer("leftFlag", nameFlag);
                 isAnswered = true;
                 return;
             }
             if (!isAnswered && y > 3) {
-                presenter.checkAnswer(this, "rightFlag", nameFlag);
+                presenter.checkAnswer("rightFlag", nameFlag);
                 isAnswered = true;
                 return;
             }
@@ -153,6 +140,26 @@ public class TiltActivity extends AppCompatActivity implements SensorEventListen
                 presenter.onStart();
             }
         }
+    }
+
+    private void loadSounds() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            this.soundPool = new SoundPool.Builder().setMaxStreams(1000).build();
+        } else {
+            this.soundPool = new SoundPool(1000, AudioManager.STREAM_MUSIC, 0);
+        }
+        this.soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
+            @Override
+            public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+                soundLoaded = true;
+            }
+        });
+      this.soundPool.load(this, R.raw.dustyroom_multimedia_incorrect_negative_tone, 1);
+      this.soundPool.load(this, R.raw.dustyroom_multimedia_correct_complete_bonus, 2);
+    }
+
+    public void playSound(int soundID) {
+        soundPool.play(soundID, 1, 1, 1, 0, 1f);
     }
 
     @Override

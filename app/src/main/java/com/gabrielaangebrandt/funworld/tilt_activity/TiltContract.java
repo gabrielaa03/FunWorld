@@ -1,6 +1,7 @@
 package com.gabrielaangebrandt.funworld.tilt_activity;
 
 import android.content.Context;
+import android.media.SoundPool;
 import android.view.animation.Animation;
 
 /**
@@ -12,7 +13,9 @@ public interface TiltContract {
 
         void sendNumbers(String left, String right, String top);
 
-        void sendAnimation(String side, int counterFalse, int counterTrue);
+        void sendAction(int counterFalse, int counterTrue);
+
+        void playSound(int sound);
     }
 
     interface TiltPresenter {
@@ -20,8 +23,6 @@ public interface TiltContract {
 
         void onStop();
 
-        void checkAnswer(Context context, String side, String nameFlag);
-
-        void playSound(int soundID);
+        void checkAnswer(String side, String nameFlag);
     }
 }

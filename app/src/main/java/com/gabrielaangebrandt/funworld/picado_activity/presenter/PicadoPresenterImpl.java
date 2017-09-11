@@ -97,7 +97,6 @@ public class PicadoPresenterImpl extends BaseImpl implements PicadoContract.Pica
                     chooseCity(rand.nextInt(50));
                 }
             }, 500);
-//            presenter.start();
         }
     }
 
