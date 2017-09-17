@@ -26,7 +26,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
 
-
 public class MainActivity extends AppCompatActivity implements TabLayout.OnTabSelectedListener {
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;

@@ -3,9 +3,6 @@ package com.gabrielaangebrandt.funworld.models.data_model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-/**
- * Created by Gabriela on 22.7.2017..
- */
 public class Language {
 
     @SerializedName("iso639_1")

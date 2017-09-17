@@ -20,10 +20,6 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-/**
- * Created by Gabriela on 16.5.2017..
- */
-
 public class FragmentGames extends Fragment {
     Unbinder unbinder;
 
@@ -36,7 +32,7 @@ public class FragmentGames extends Fragment {
 
     @OnClick(R.id.rl_memory)
     void openADMemory() {
-        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext()).setTitle(R.string.gameInstructions).setMessage(R.string.picadoInstructions);
+        final AlertDialog.Builder dialog = new AlertDialog.Builder(getContext()).setTitle(R.string.gameInstructions).setMessage(R.string.memoryInstructions);
         final AlertDialog alert = dialog.create();
         alert.show();
 

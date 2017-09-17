@@ -13,8 +13,6 @@ import com.gabrielaangebrandt.funworld.main_activity.view.MainActivity;
 import butterknife.BindView;
 
 public class LauncherActivity extends AppCompatActivity {
-    @BindView(R.id.progressBar)
-    ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

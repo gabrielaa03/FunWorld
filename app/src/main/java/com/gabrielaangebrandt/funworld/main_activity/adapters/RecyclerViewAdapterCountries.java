@@ -12,9 +12,8 @@ import com.gabrielaangebrandt.funworld.R;
 
 import java.util.List;
 
-/**
- * Created by Gabriela on 25.7.2017..
- */
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class RecyclerViewAdapterCountries extends RecyclerView.Adapter<RecyclerViewAdapterCountries.ViewHolder> {
 
@@ -44,11 +43,11 @@ public class RecyclerViewAdapterCountries extends RecyclerView.Adapter<RecyclerV
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView name;
+        @BindView(R.id.tv_name_of_country) TextView name;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            name = (TextView) itemView.findViewById(R.id.tv_name_of_country);
+            ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);
         }
 

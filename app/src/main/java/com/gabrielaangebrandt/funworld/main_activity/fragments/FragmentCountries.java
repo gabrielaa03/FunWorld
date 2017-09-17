@@ -22,11 +22,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
-
-/**
- * Created by Gabriela on 11.5.2017..
- */
-
 public class
 
 

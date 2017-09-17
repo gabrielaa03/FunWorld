@@ -29,10 +29,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
 
-/**
- * Created by Gabriela on 23.7.2017..
- */
-
 public class TiltActivity extends AppCompatActivity implements SensorEventListener, TiltContract.TiltView {
 
     TiltContract.TiltPresenter presenter;

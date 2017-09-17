@@ -13,10 +13,9 @@ import com.gabrielaangebrandt.funworld.models.data_model.MemoryObject;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-/**
- * Created by Gabriela on 25.7.2017..
- */
 public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.ViewHolder> {
 
     List<MemoryObject> objects = new ArrayList<>();
@@ -50,11 +49,11 @@ public class MyRecyclerAdapter extends RecyclerView.Adapter<MyRecyclerAdapter.Vi
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        ImageView flag;
+       @BindView(R.id.iv_memory_element) ImageView flag;
 
         ViewHolder(View view) {
             super(view);
-            flag = (ImageView) view.findViewById(R.id.iv_memory_element);
+            ButterKnife.bind(this, itemView);
             flag.setOnClickListener(this);
         }
 

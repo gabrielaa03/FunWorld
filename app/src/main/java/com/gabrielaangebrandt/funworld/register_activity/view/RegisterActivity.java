@@ -16,6 +16,7 @@ import com.gabrielaangebrandt.funworld.base.SharedPrefs;
 import com.gabrielaangebrandt.funworld.login_activity.view.Login;
 import com.gabrielaangebrandt.funworld.models.data_model.Player;
 import com.gabrielaangebrandt.funworld.models.database.DatabaseConfig;
+import com.gabrielaangebrandt.funworld.models.database.DatabaseManager;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -67,8 +68,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                 etAnswer.getText().toString().equals("") || etAnswer.getText().toString().isEmpty()) {
             Toast.makeText(this, getText(R.string.elementsArentEntered), Toast.LENGTH_LONG).show();
         } else {
-            Realm realm = DatabaseConfig.getRealmInstance();
-            Player user = realm.where(Player.class).equalTo("username", etUsername.getText().toString()).findFirst();
+            Player user = DatabaseManager.checkIfUserExists("username", etUsername.getText().toString());
             if (user == null) {
                 String expression = "^[\\w\\.-]+@([\\w\\-]+\\.)+[A-Z]{2,4}$";
                 Pattern pattern = Pattern.compile(expression, Pattern.CASE_INSENSITIVE);
@@ -77,10 +77,7 @@ public class RegisterActivity extends AppCompatActivity implements AdapterView.O
                     if (etPassword1.getText().toString().equals(etPassword2.getText().toString())) {
                         Player player = new Player(etName.getText().toString(), etUsername.getText().toString(), etPassword1.getText().toString(), etEmail.getText().toString(), q, etAnswer.getText().toString(),
                               "59:59", 10000000, 0);
-                        Realm object = DatabaseConfig.getRealmInstance();
-                        object.beginTransaction();
-                        object.copyToRealmOrUpdate(player);
-                        object.commitTransaction();
+                        DatabaseManager.savePlayer(player);
                         SharedPrefs.setSharedPrefs("name", etName.getText().toString(), this);
                         Toast.makeText(this, R.string.successfullRegistration, Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(this, Login.class);

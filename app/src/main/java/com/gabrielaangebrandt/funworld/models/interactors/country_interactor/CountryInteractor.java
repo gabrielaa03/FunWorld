@@ -8,11 +8,6 @@ import java.util.List;
 
 import io.reactivex.Observable;
 
-
-/**
- * Created by Plava tvornica on 28.7.2017..
- */
-
 public interface CountryInteractor extends Base {
         void checkDisposable(String name, Listener listener);
         Observable<List<Example>> getCountryObservable(String name);

@@ -1,12 +1,5 @@
 package com.gabrielaangebrandt.funworld.tilt_activity.presenter;
 
-import android.content.Context;
-import android.media.AudioManager;
-import android.media.SoundPool;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
-
-import com.gabrielaangebrandt.funworld.R;
 import com.gabrielaangebrandt.funworld.models.interactors.country_interactor.CountryInteractorImpl;
 import com.gabrielaangebrandt.funworld.models.interactors.country_interactor.CountryInteractor;
 import com.gabrielaangebrandt.funworld.tilt_activity.TiltContract;
@@ -17,9 +10,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-/**
- * Created by Plava tvornica on 28.7.2017..
- */
 
 public class TiltPresenterImpl implements TiltContract.TiltPresenter {
     private TiltContract.TiltView view;
@@ -81,6 +71,7 @@ public class TiltPresenterImpl implements TiltContract.TiltPresenter {
             case "leftFlag":
                 assert key != null;
                 if (key.equals(left)) {
+                    counterTrue++;
                     view.playSound(2);
                 } else {
                     view.playSound(1);

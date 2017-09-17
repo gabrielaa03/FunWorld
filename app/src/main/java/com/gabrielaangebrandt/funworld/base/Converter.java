@@ -6,9 +6,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-/**
- * Created by Gabriela on 13.8.2017..
- */
 
 public class Converter {
     public static long getTimeInLong(String format) {

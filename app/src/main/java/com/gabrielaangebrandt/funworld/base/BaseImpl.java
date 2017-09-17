@@ -3,9 +3,6 @@ package com.gabrielaangebrandt.funworld.base;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 
-/**
- * Created by Plava tvornica on 11.8.2017..
- */
 
 public class BaseImpl implements Base {
 

@@ -4,10 +4,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/**
- * Created by Gabriela on 22.7.2017..
- */
-
 public class Utils {
     public static final String URL = "https://restcountries.eu/rest/v2/name/";
 

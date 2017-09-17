@@ -13,6 +13,7 @@ import com.gabrielaangebrandt.funworld.forgotten_password_activity.view.Forgotte
 import com.gabrielaangebrandt.funworld.main_activity.view.MainActivity;
 import com.gabrielaangebrandt.funworld.models.data_model.Player;
 import com.gabrielaangebrandt.funworld.models.database.DatabaseConfig;
+import com.gabrielaangebrandt.funworld.models.database.DatabaseManager;
 import com.gabrielaangebrandt.funworld.register_activity.view.RegisterActivity;
 
 import butterknife.BindView;
@@ -47,8 +48,7 @@ public class Login extends AppCompatActivity {
     //pri logiranju provjeri postoji li korisnik u bazi, ako postoji spremi u sharedPrefs, ako ne ispiši poruku
     @OnClick(R.id.btn_login1)
     public void openMainActivity() {
-        realm = DatabaseConfig.getRealmInstance();
-        Player user = realm.where(Player.class).equalTo("username", username.getText().toString()).equalTo("password", password.getText().toString()).findFirst();
+        Player user = DatabaseManager.loginCheck("username", username.getText().toString(), "password", password.getText().toString());
 
         if (password.getText().toString().equals("") || username.getText().toString().equals("")) {
             Toast.makeText(this, R.string.wrongPasswordOrUsername, Toast.LENGTH_LONG).show();

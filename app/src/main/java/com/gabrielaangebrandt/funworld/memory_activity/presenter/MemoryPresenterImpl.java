@@ -15,10 +15,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Gabriela on 27.7.2017..
- */
-
 public class MemoryPresenterImpl extends BaseImpl implements MemoryContract.MemoryPresenter {
     private MemoryContract.MemoryView view;
     private List<Integer> numbers = new ArrayList<>();
@@ -80,6 +76,7 @@ public class MemoryPresenterImpl extends BaseImpl implements MemoryContract.Memo
     public void onStop() {
         disposeCompositeD();
     }
+
     //function to set timer in activity
     @Override
     public void setTimer() {

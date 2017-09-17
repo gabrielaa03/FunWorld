@@ -5,12 +5,6 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-/**
- * Created by Gabriela on 22.7.2017..
- */
-
-
-
 public class Example {
 
     @SerializedName("name")

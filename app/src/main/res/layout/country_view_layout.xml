@@ -23,6 +23,12 @@
         </ProgressBar>
     </LinearLayout>
 
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
     <!--IME-->
     <TextView
         android:id="@+id/countryTitle"
@@ -233,6 +239,6 @@
         android:textColor="@color/black"
         android:textSize="20sp"
         tools:text="TextView" />
-
-
+    </RelativeLayout>
+</ScrollView>
 </RelativeLayout>

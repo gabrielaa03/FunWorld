@@ -1,13 +1,8 @@
 package com.gabrielaangebrandt.funworld.models.data_model;
 
-import java.util.Date;
-
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-/**
- * Created by Gabriela on 30.5.2017..
- */
 
 public class Player extends RealmObject {
     @PrimaryKey

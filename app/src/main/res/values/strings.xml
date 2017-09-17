@@ -125,5 +125,6 @@
     <string name="gameInstructions">Instructions</string>
     <string name="memoryInstructions">Pair all flags in shortest time possible.</string>
     <string name="tiltInstructins">Put the device in horizontal position and then tilt device left or right to choose  flag.</string>
+    <string name="wrongUsername">User does not exists.</string>
 
 </resources>

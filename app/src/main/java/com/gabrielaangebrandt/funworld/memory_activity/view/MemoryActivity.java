@@ -28,10 +28,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-/**
- * Created by Gabriela on 23.7.2017..
- */
-
 public class MemoryActivity extends AppCompatActivity implements MemoryContract.MemoryView {
 
     @BindView(R.id.time)

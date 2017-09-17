@@ -1,9 +1,5 @@
 package com.gabrielaangebrandt.funworld.models.data_model;
 
-/**
- * Created by Plava tvornica on 10.8.2017..
- */
-
 public class MemoryObject {
     private int ID;
     private boolean isClicked;

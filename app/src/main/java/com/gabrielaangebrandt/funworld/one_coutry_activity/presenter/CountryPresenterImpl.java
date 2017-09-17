@@ -14,10 +14,6 @@ import com.gabrielaangebrandt.funworld.models.interactors.country_interactor.lis
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Gabriela on 22.7.2017..
- */
-
 public class CountryPresenterImpl implements CountryContract.CountryPresenter, Listener {
 
     private CountryContract.CountryView view;

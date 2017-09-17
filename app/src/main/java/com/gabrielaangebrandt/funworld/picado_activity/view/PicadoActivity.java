@@ -33,10 +33,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.realm.Realm;
 
-/**
- * Created by Gabriela on 23.7.2017..
- */
-
 public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallback, PicadoContract.PicadoView {
     GoogleMap googleMap;
     MapFragment mapFragment;
@@ -148,7 +144,6 @@ public class PicadoActivity extends AppCompatActivity implements OnMapReadyCallb
                              marker.remove();
                              marker2.remove();
                          }
-
                     }
                 }).show();
     }

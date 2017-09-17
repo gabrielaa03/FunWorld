@@ -13,10 +13,6 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.observers.DisposableObserver;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * Created by Plava tvornica on 28.7.2017..
- */
-
 public class CountryInteractorImpl extends BaseImpl implements CountryInteractor{
 
     public void checkDisposable(String name, final Listener listener){
